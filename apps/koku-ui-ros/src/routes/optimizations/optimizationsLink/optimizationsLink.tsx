@@ -1,10 +1,10 @@
+import { OptimizationsLink as UiOptimizationsLink } from '@koku-ui/ui-lib/components/optimizations/link';
 import { getQuery } from 'api/queries/query';
 import type { RosReport } from 'api/ros/ros';
 import { RosPathsType, RosType } from 'api/ros/ros';
 import type { AxiosError } from 'axios';
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
 import type { AnyAction } from 'redux';
 import type { ThunkDispatch } from 'redux-thunk';
 import type { RootState } from 'store';
@@ -30,29 +30,10 @@ type OptimizationsLinkProps = OptimizationsLinkOwnProps & OptimizationsLinkState
 const reportPathsType = RosPathsType.recommendations;
 const reportType = RosType.ros;
 
-const OptimizationsLink: React.FC<OptimizationsLinkProps> = ({
-  cluster,
-  linkPath,
-  linkState,
-  project,
-}: OptimizationsLinkOwnProps) => {
+const OptimizationsLink: React.FC<OptimizationsLinkProps> = ({ cluster, linkPath, linkState, project }) => {
   const { report } = useMapToProps({ cluster, project });
-
   const count = report?.meta ? report.meta.count : 0;
-
-  if (count === 0) {
-    return count;
-  }
-  return (
-    <Link
-      to={linkPath}
-      state={{
-        ...(linkState && linkState),
-      }}
-    >
-      {count}
-    </Link>
-  );
+  return <UiOptimizationsLink count={count} linkPath={linkPath} linkState={linkState} />;
 };
 
 const useMapToProps = ({ cluster, project }: OptimizationsLinkOwnProps): OptimizationsLinkStateProps => {
