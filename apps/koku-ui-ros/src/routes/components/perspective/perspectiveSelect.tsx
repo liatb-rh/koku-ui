@@ -1,14 +1,9 @@
 import type { MessageDescriptor } from '@formatjs/intl/src/types';
-import type { SelectWrapperOption } from '@koku-ui/ui-lib/components/selects/select-wrapper';
-import { SelectWrapper } from '@koku-ui/ui-lib/components/selects/select-wrapper';
-import { Title } from '@patternfly/react-core';
-import { FilterIcon } from '@patternfly/react-icons/dist/esm/icons/filter-icon';
+import { PerspectiveSelect as UiPerspectiveSelect } from '@koku-ui/ui-lib/components/perspective';
 import messages from 'locales/messages';
 import React from 'react';
 import type { WrappedComponentProps } from 'react-intl';
 import { injectIntl } from 'react-intl';
-
-import { styles } from './perspective.styles';
 
 interface PerspectiveSelectOwnProps {
   currentItem: string;
@@ -22,80 +17,33 @@ interface PerspectiveSelectOwnProps {
   title?: MessageDescriptor;
 }
 
-interface PerspectiveSelectState {
-  // TBD...
-}
-
 type PerspectiveSelectProps = PerspectiveSelectOwnProps & WrappedComponentProps;
 
-class PerspectiveSelectBase extends React.Component<PerspectiveSelectProps, PerspectiveSelectState> {
-  protected defaultState: PerspectiveSelectState = {
-    // TBD...
-  };
-  public state: PerspectiveSelectState = { ...this.defaultState };
+const PerspectiveSelectBase: React.FC<PerspectiveSelectProps> = ({
+  currentItem,
+  intl,
+  isDisabled,
+  onSelect,
+  options,
+  title,
+}) => {
+  const uiOptions =
+    options?.map(o => ({
+      isDisabled: o.isDisabled,
+      label: intl.formatMessage(o.label, { value: o.value }),
+      value: o.value,
+    })) ?? [];
 
-  private getSelectOptions = (): SelectWrapperOption[] => {
-    const { intl, options } = this.props;
-
-    const selections: SelectWrapperOption[] = [];
-
-    options.map(option => {
-      selections.push({
-        isDisabled: option.isDisabled,
-        toString: () => intl.formatMessage(option.label, { value: option.value }),
-        value: option.value,
-      });
-    });
-    return selections;
-  };
-
-  private getSelect = () => {
-    const { currentItem, intl, isDisabled, options } = this.props;
-
-    if (options.length === 1) {
-      return (
-        <div style={styles.perspectiveOptionLabel}>
-          {intl.formatMessage(options[0].label, { value: options[0].value })}
-        </div>
-      );
-    }
-
-    const selectOptions = this.getSelectOptions();
-    const selection = selectOptions.find(option => option.value === currentItem);
-
-    return (
-      <SelectWrapper
-        id="perspective-select"
-        isDisabled={isDisabled}
-        onSelect={this.handleOnSelect}
-        options={selectOptions}
-        selection={selection}
-        toggleIcon={<FilterIcon />}
-      />
-    );
-  };
-
-  private handleOnSelect = (_evt, selection: SelectWrapperOption) => {
-    const { onSelect } = this.props;
-
-    if (onSelect) {
-      onSelect(selection.value);
-    }
-  };
-
-  public render() {
-    const { intl, title } = this.props;
-
-    return (
-      <div style={styles.perspectiveSelector}>
-        <Title headingLevel="h3" size="md" style={styles.perspectiveLabel}>
-          {intl.formatMessage(title || messages.perspective)}
-        </Title>
-        {this.getSelect()}
-      </div>
-    );
-  }
-}
+  return (
+    <UiPerspectiveSelect
+      currentItem={currentItem}
+      isDisabled={isDisabled}
+      onSelect={onSelect}
+      options={uiOptions}
+      title={intl.formatMessage(title || messages.perspective)}
+    />
+  );
+};
 
 const PerspectiveSelect = injectIntl(PerspectiveSelectBase);
 

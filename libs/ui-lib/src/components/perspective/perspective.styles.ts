@@ -1,7 +1,7 @@
 import t_global_spacer_md from '@patternfly/react-tokens/dist/js/t_global_spacer_md';
 import type React from 'react';
 
-export const styles = {
+const styles = {
   perspectiveSelector: {
     display: 'flex',
     alignItems: 'center',
@@ -17,3 +17,7 @@ export const styles = {
     marginTop: 6,
   },
 } as { [className: string]: React.CSSProperties };
+
+export { styles };
+
+
