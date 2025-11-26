@@ -1,3 +1,5 @@
+import type { SelectWrapperOption } from '@koku-ui/ui-lib/components/selects/select-wrapper';
+import { SelectWrapper } from '@koku-ui/ui-lib/components/selects/select-wrapper';
 import type { ToolbarLabelGroup } from '@patternfly/react-core';
 import { SearchInput, ToolbarFilter, ToolbarItem } from '@patternfly/react-core';
 import { FilterIcon } from '@patternfly/react-icons/dist/esm/icons/filter-icon';
@@ -9,8 +11,6 @@ import { cloneDeep } from 'lodash';
 import React from 'react';
 import type { ToolbarChipGroupExt } from 'routes/components/dataToolbar/utils/common';
 import { ResourceTypeahead } from 'routes/components/resourceTypeahead';
-import type { SelectWrapperOption } from 'routes/components/selectWrapper';
-import { SelectWrapper } from 'routes/components/selectWrapper';
 import type { Filter } from 'routes/utils/filter';
 
 import type { Filters } from './common';

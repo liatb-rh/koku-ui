@@ -1,12 +1,12 @@
 import type { MessageDescriptor } from '@formatjs/intl/src/types';
+import type { SelectWrapperOption } from '@koku-ui/ui-lib/components/selects/select-wrapper';
+import { SelectWrapper } from '@koku-ui/ui-lib/components/selects/select-wrapper';
 import { Title } from '@patternfly/react-core';
 import { FilterIcon } from '@patternfly/react-icons/dist/esm/icons/filter-icon';
 import messages from 'locales/messages';
 import React from 'react';
 import type { WrappedComponentProps } from 'react-intl';
 import { injectIntl } from 'react-intl';
-import type { SelectWrapperOption } from 'routes/components/selectWrapper';
-import { SelectWrapper } from 'routes/components/selectWrapper';
 
 import { styles } from './perspective.styles';
 

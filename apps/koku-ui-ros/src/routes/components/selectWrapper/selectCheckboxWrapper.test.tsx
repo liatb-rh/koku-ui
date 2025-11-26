@@ -2,7 +2,7 @@ import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import React from 'react';
 
-import { SelectCheckboxWrapper } from './index';
+import { SelectCheckboxWrapper } from '@koku-ui/ui-lib/components/selects/select-wrapper';
 
 test('checkbox selector', async () => {
   const user = userEvent.setup({ advanceTimers: jest.advanceTimersByTime });

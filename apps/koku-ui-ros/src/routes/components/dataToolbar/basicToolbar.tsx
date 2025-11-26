@@ -1,5 +1,6 @@
 import './dataToolbar.scss';
 
+import type { SelectWrapperOption } from '@koku-ui/ui-lib/components/selects/select-wrapper';
 import { Toolbar, ToolbarContent, ToolbarGroup, ToolbarItem, ToolbarToggleGroup } from '@patternfly/react-core';
 import { FilterIcon } from '@patternfly/react-icons/dist/esm/icons/filter-icon';
 import type { Query } from 'api/queries/query';
@@ -9,7 +10,6 @@ import React from 'react';
 import type { WrappedComponentProps } from 'react-intl';
 import { injectIntl } from 'react-intl';
 import { connect } from 'react-redux';
-import type { SelectWrapperOption } from 'routes/components/selectWrapper';
 import { isEqual } from 'routes/utils/equal';
 import type { Filter } from 'routes/utils/filter';
 import { createMapStateToProps } from 'store/common';

@@ -1,0 +1,8 @@
+.selectWrapper .pf-v6-c-menu-toggle {
+  max-width: unset;
+}
+.selectWrapper .pf-v6-c-menu-toggle__text {
+  width: max-content;
+}
+
+

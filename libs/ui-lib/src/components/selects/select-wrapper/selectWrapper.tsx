@@ -1,14 +1,14 @@
-import './selectWrapper.scss';
+import './selectWrapper.css';
 
 import { Icon, MenuToggle, Select, SelectList, SelectOption } from '@patternfly/react-core';
 import React, { useState } from 'react';
 
 export interface SelectWrapperOption {
-  description?: string; // Option description
+  description?: string;
   compareTo?: (option: SelectWrapperOption) => boolean;
   isDisabled?: boolean;
-  toString?: () => string; // Option label
-  value?: string; // Option value
+  toString?: () => string;
+  value?: string;
 }
 
 interface SelectWrapperOwnProps {
@@ -71,13 +71,7 @@ const SelectWrapper: React.FC<SelectWrapperProps> = ({
   };
 
   const toggle = toggleRef => (
-    <MenuToggle
-      icon={toggleIcon && <Icon>{toggleIcon}</Icon>}
-      isDisabled={isDisabled}
-      isExpanded={isOpen}
-      onClick={handleOnToggle}
-      ref={toggleRef}
-    >
+    <MenuToggle icon={toggleIcon && <Icon>{toggleIcon}</Icon>} isDisabled={isDisabled} isExpanded={isOpen} onClick={handleOnToggle} ref={toggleRef}>
       {getPlaceholder()}
     </MenuToggle>
   );
@@ -105,4 +99,6 @@ const SelectWrapper: React.FC<SelectWrapperProps> = ({
   );
 };
 
-export default SelectWrapper;
+export { SelectWrapper };
+
+

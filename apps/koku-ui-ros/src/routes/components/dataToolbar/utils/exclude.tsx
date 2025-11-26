@@ -1,10 +1,10 @@
+import type { SelectWrapperOption } from '@koku-ui/ui-lib/components/selects/select-wrapper';
+import { SelectWrapper } from '@koku-ui/ui-lib/components/selects/select-wrapper';
 import { ToolbarItem } from '@patternfly/react-core';
 import { FilterIcon } from '@patternfly/react-icons/dist/esm/icons/filter-icon';
 import { intl } from 'components/i18n';
 import messages from 'locales/messages';
 import React from 'react';
-import type { SelectWrapperOption } from 'routes/components/selectWrapper';
-import { SelectWrapper } from 'routes/components/selectWrapper';
 
 import type { Filters } from './common';
 import { hasFilters } from './common';
