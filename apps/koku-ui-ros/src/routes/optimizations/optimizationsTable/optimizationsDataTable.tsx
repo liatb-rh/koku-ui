@@ -1,5 +1,3 @@
-import 'routes/components/dataTable/dataTable.scss';
-
 import { Icon } from '@patternfly/react-core';
 import { ExclamationTriangleIcon } from '@patternfly/react-icons/dist/esm/icons/exclamation-triangle-icon';
 import type { Query } from 'api/queries/query';
@@ -8,8 +6,7 @@ import messages from 'locales/messages';
 import React, { useEffect, useState } from 'react';
 import { useIntl } from 'react-intl';
 import { Link } from 'react-router-dom';
-import { DataTable } from 'routes/components/dataTable';
-import { styles } from 'routes/components/dataTable/dataTable.styles';
+import { DataTable, styles as dataTableStyles } from '@koku-ui/ui-lib/components/tables/dataTable';
 import { NoOptimizationsState } from 'routes/components/page/noOptimizations/noOptimizationsState';
 import { getOptimizationsBreakdownPath } from 'routes/utils/paths';
 import { getTimeFromNow } from 'utils/dates';
@@ -93,7 +90,7 @@ const OptimizationsDataTable: React.FC<OptimizationsDataTableProps> = ({
       {
         name: intl.formatMessage(messages.optimizationsNames, { value: 'last_reported' }),
         orderBy: 'last_reported',
-        style: styles.lastItemColumn,
+        style: dataTableStyles.lastItemColumn,
         ...(hasData && { isSortable: true }),
       },
     ];
@@ -160,7 +157,7 @@ const OptimizationsDataTable: React.FC<OptimizationsDataTableProps> = ({
               <>
                 {cluster}
                 {showWarningIcon && (
-                  <span style={styles.warningIcon}>
+                  <span style={dataTableStyles.warningIcon}>
                     <Icon status="warning">
                       <ExclamationTriangleIcon />
                     </Icon>
@@ -170,7 +167,7 @@ const OptimizationsDataTable: React.FC<OptimizationsDataTableProps> = ({
             ),
             hidden: hideCluster,
           },
-          { value: lastReported, style: styles.lastItem },
+          { value: lastReported, style: dataTableStyles.lastItem },
         ],
         optimization: {
           container: item.container,

@@ -1,0 +1,32 @@
+.monthOverMonthOverride div {
+  display: block;
+  margin-right: 0;
+  margin-bottom: var(--pf-t--global--spacer--xs);
+}
+.monthOverMonthOverride div.iconOverride.decrease {
+  color: var(--pf-t--global--color--status--success--default);
+}
+.monthOverMonthOverride div.iconOverride.increase {
+  color: var(--pf-t--global--color--status--danger--default);
+}
+.monthOverMonthOverride div .fa-sort-up {
+  margin-left: 10px;
+}
+.monthOverMonthOverride div .fa-sort-down {
+  margin-left: 10px;
+}
+.monthOverMonthOverride div .fa-sort-up::before {
+  color: var(--pf-t--global--color--status--danger--default);
+}
+.monthOverMonthOverride div .fa-sort-down::before {
+  color: var(--pf-t--global--color--status--success--default);
+}
+.monthOverMonthOverride div span {
+  margin-right: -17px !important;
+}
+
+.tableOverride.pf-v6-c-table tbody .pf-v6-c-table__check input {
+  margin-top: .40rem;
+}
+
+

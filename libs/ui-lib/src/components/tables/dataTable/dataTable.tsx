@@ -1,53 +1,58 @@
+import './dataTable.css';
+
 import { Bullseye, EmptyState, EmptyStateBody, Spinner } from '@patternfly/react-core';
 import { CalculatorIcon } from '@patternfly/react-icons/dist/esm/icons/calculator-icon';
 import type { ThProps } from '@patternfly/react-table';
 import { SortByDirection, Table, TableVariant, Tbody, Td, Th, Thead, Tr } from '@patternfly/react-table';
-import messages from 'locales/messages';
-import type { ReactNode } from 'react';
 import React from 'react';
-import type { WrappedComponentProps } from 'react-intl';
-import { injectIntl } from 'react-intl';
-import { EmptyFilterState } from 'routes/components/state/emptyFilterState';
-import type { RouterComponentProps } from 'utils/router';
-import { withRouter } from 'utils/router';
 
 import { styles } from './dataTable.styles';
-interface SelectableTableOwnProps {
+
+interface DataTableOwnProps {
   columns?: any[];
-  emptyState?: ReactNode;
-  filterBy: any;
+  emptyState?: React.ReactNode;
+  emptyStateBody?: React.ReactNode | string;
+  filterBy?: any;
+  isActionsCell?: boolean;
   isLoading?: boolean;
-  onSort(value: string, isSortAscending: boolean);
-  onRowClick(rowIndex: number);
-  orderBy: any;
+  isSelectable?: boolean;
+  onSelect?(items: any[], isSelected: boolean): void;
+  onSort?(value: string, isSortAscending: boolean): void;
+  orderBy?: any;
   rows?: any[];
+  selectedItems?: any[];
+  ariaLabel?: string;
 }
 
-type SelectableTableProps = SelectableTableOwnProps & RouterComponentProps & WrappedComponentProps;
+type DataTableProps = DataTableOwnProps;
 
-class SelectableTable extends React.Component<SelectableTableProps, any> {
-  constructor(props: SelectableTableProps) {
+class DataTable extends React.Component<DataTableProps, any> {
+  constructor(props: DataTableProps) {
     super(props);
+    this.handleOnSelect = this.handleOnSelect.bind(this);
     this.handleOnSort = this.handleOnSort.bind(this);
   }
 
   private getEmptyState = () => {
-    const { emptyState, filterBy, intl } = this.props;
+    const { emptyState, emptyStateBody, filterBy } = this.props;
 
     if (filterBy) {
       for (const val of Object.values(filterBy)) {
         if (val !== '*') {
-          return <EmptyFilterState filter={val as string} showMargin={false} />;
+          return (
+            <EmptyState icon={CalculatorIcon} titleText="">
+              <EmptyStateBody>No results match the selected filters</EmptyStateBody>
+            </EmptyState>
+          );
         }
       }
     }
-    // Return custom empty state
     if (emptyState) {
       return emptyState;
     }
     return (
       <EmptyState icon={CalculatorIcon} titleText="">
-        <EmptyStateBody>{intl.formatMessage(messages.detailsEmptyState)}</EmptyStateBody>
+        <EmptyStateBody>{emptyStateBody ?? 'No data available'}</EmptyStateBody>
       </EmptyState>
     );
   };
@@ -68,9 +73,31 @@ class SelectableTable extends React.Component<SelectableTableProps, any> {
   private getSortParams = (index: number): ThProps['sort'] => {
     return {
       sortBy: this.getSortBy(index),
-      onSort: this.handleOnSort,
+      onSort: (_evt, i, direction) => this.handleOnSort(i, direction),
       columnIndex: index,
     };
+  };
+
+  private handleOnSelect = (isSelected, rowId) => {
+    const { onSelect, rows } = this.props;
+
+    let newRows;
+    let items = [];
+    if (rowId === -1) {
+      newRows = rows.map(row => {
+        row.selected = isSelected;
+        return row;
+      });
+    } else {
+      newRows = [...rows];
+      newRows[rowId].selected = isSelected;
+      items = [newRows[rowId].item];
+    }
+    this.setState({ rows }, () => {
+      if (onSelect) {
+        onSelect(items, isSelected);
+      }
+    });
   };
 
   private handleOnSort = (index, direction) => {
@@ -83,26 +110,14 @@ class SelectableTable extends React.Component<SelectableTableProps, any> {
     }
   };
 
-  private handleOnRowClick = (rowIndex: number) => {
-    const { onRowClick, rows } = this.props;
-
-    rows.map(row => (row.selected = false));
-    rows[rowIndex].selected = true;
-
-    this.setState({ rows }, () => {
-      if (onRowClick) {
-        onRowClick(rowIndex);
-      }
-    });
-  };
-
   public render() {
-    const { columns, intl, isLoading, rows } = this.props;
+    const { ariaLabel, columns = [], isActionsCell = false, isLoading, isSelectable, rows = [] } = this.props;
 
     return (
       <>
         <Table
-          aria-label={intl.formatMessage(messages.selectableTableAriaLabel)}
+          aria-label={ariaLabel ?? 'Data table'}
+          className="tableOverride"
           gridBreakPoint="grid-2xl"
           variant={TableVariant.compact}
         >
@@ -133,30 +148,27 @@ class SelectableTable extends React.Component<SelectableTableProps, any> {
               </Tr>
             ) : (
               rows.map((row, rowIndex) => (
-                <Tr
-                  aria-label={intl.formatMessage(messages.selectableTableRowAriaLabel)}
-                  isSelectable
-                  isClickable
-                  isRowSelected={row.selected}
-                  onRowClick={() => this.handleOnRowClick(rowIndex)}
-                  key={`row-${rowIndex}`}
-                >
+                <Tr key={`row-${rowIndex}`}>
                   {row.cells.map((item, cellIndex) =>
-                    cellIndex === 0 ? (
-                      <Th
-                        aria-label={intl.formatMessage(messages.selectableTableHeaderAriaLabel)}
+                    cellIndex === 0 && isSelectable ? (
+                      <Td
                         dataLabel={columns[cellIndex].name}
-                        key={`cell-${rowIndex}-${cellIndex}`}
+                        key={`cell-${cellIndex}-${rowIndex}`}
                         modifier="nowrap"
+                        select={{
+                          isDisabled: row.selectionDisabled,
+                          isSelected: row.selected,
+                          onSelect: (_evt, isSelected) => this.handleOnSelect(isSelected, rowIndex),
+                          rowIndex,
+                        }}
                         style={item.style}
-                      >
-                        {item.value}
-                      </Th>
+                      />
                     ) : (
                       <Td
                         dataLabel={columns[cellIndex].name}
                         key={`cell-${rowIndex}-${cellIndex}`}
                         modifier="nowrap"
+                        isActionCell={isActionsCell && cellIndex === row.cells.length - 1}
                         style={item.style}
                       >
                         {item.value}
@@ -174,4 +186,6 @@ class SelectableTable extends React.Component<SelectableTableProps, any> {
   }
 }
 
-export default injectIntl(withRouter(SelectableTable));
+export { DataTable };
+
+

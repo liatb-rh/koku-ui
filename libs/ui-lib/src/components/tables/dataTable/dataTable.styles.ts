@@ -6,7 +6,7 @@ import t_global_spacer_sm from '@patternfly/react-tokens/dist/js/t_global_spacer
 import t_global_spacer_xs from '@patternfly/react-tokens/dist/js/t_global_spacer_xs';
 import type React from 'react';
 
-export const styles = {
+const styles = {
   costColumn: {
     textAlign: 'right',
     display: 'flex',
@@ -53,3 +53,7 @@ export const styles = {
     paddingLeft: t_global_spacer_sm.var,
   },
 } as { [className: string]: React.CSSProperties };
+
+export { styles };
+
+
