@@ -1,5 +1,6 @@
-import 'routes/components/charts/common/chart.scss';
+import '@koku-ui/ui-lib/components/charts/common/chart.css';
 
+import ChartTheme from '@koku-ui/ui-lib/components/charts/theme';
 import {
   Chart,
   ChartArea,
@@ -24,7 +25,6 @@ import {
   isDataAvailable,
   isSeriesHidden,
 } from 'routes/components/charts/common/chartUtils';
-import ChartTheme from 'routes/components/charts/theme';
 import { unitsLookupKey } from 'utils/format';
 
 import { chartStyles } from './optimizationsBreakdownChart.styles';
