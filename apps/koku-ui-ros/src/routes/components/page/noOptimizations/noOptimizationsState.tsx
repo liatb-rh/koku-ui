@@ -1,9 +1,9 @@
+import { OptimizationIcon } from '@koku-ui/ui-lib/components/icons/optimization-icon';
 import { EmptyState, EmptyStateBody, EmptyStateVariant } from '@patternfly/react-core';
 import messages from 'locales/messages';
 import React from 'react';
 import type { WrappedComponentProps } from 'react-intl';
 import { injectIntl } from 'react-intl';
-import { OptimizationIcon } from 'routes/components/icons/optimizationIcon';
 
 interface NoOptimizationsStateOwnProps {
   // TBD...
