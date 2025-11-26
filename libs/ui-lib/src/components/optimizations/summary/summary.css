@@ -1,0 +1,30 @@
+.skeleton {
+  height: 125px;
+  margin-bottom: var(--pf-t--global--font--size--md);
+  margin-top: var(--pf-t--global--font--size--md);
+}
+
+.skeleton-line {
+  width: 16%;
+  height: 1rem;
+  background: var(--pf-t--global--color--surface--default);
+  border-radius: 2px;
+}
+
+.skeleton-block {
+  width: 320px;
+  max-width: 100%;
+  background: var(--pf-t--global--color--surface--default);
+  border-radius: 2px;
+}
+
+.summary {
+  height: 100%;
+}
+
+.infoIcon {
+  font-size: var(--pf-t--global--font--size--md);
+  margin-left: 0.25rem;
+}
+
+
