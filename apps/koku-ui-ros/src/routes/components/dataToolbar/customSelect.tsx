@@ -1,12 +1,12 @@
-import './dataToolbar.scss';
+import '@koku-ui/ui-lib/components/data-toolbar/dataToolbar.css';
 
+import type { ToolbarChipGroupExt } from '@koku-ui/ui-lib/components/data-toolbar';
+import { CustomSelect as UiCustomSelect } from '@koku-ui/ui-lib/components/data-toolbar';
 import type { SelectWrapperOption } from '@koku-ui/ui-lib/components/selects/select-wrapper';
-import { SelectCheckboxWrapper } from '@koku-ui/ui-lib/components/selects/select-wrapper';
 import messages from 'locales/messages';
 import React from 'react';
 import type { WrappedComponentProps } from 'react-intl';
 import { injectIntl } from 'react-intl';
-import type { ToolbarChipGroupExt } from 'routes/components/dataToolbar/utils/common';
 import type { Filter } from 'routes/utils/filter';
 import type { RouterComponentProps } from 'utils/router';
 import { withRouter } from 'utils/router';
@@ -39,14 +39,14 @@ class CustomSelectBase extends React.Component<CustomSelectProps, CustomSelectSt
   };
   public state: CustomSelectState = { ...this.defaultState };
 
-  private getSelectOptions = (): SelectWrapperOption[] => {
+  private getSelectOptions = () => {
     const { options } = this.props;
 
-    const selectOptions: SelectWrapperOption[] = [];
+    const selectOptions: { label: string; value: string }[] = [];
 
     options.map(option => {
       selectOptions.push({
-        toString: () => option.name,
+        label: option.name,
         value: option.key,
       });
     });
@@ -57,12 +57,10 @@ class CustomSelectBase extends React.Component<CustomSelectProps, CustomSelectSt
     const { className, filters, intl, isDisabled, onSelect } = this.props;
 
     const selectOptions = this.getSelectOptions();
-    const selections = filters?.map(filter => {
-      return selectOptions.find(option => option.value === filter.value);
-    });
+    const selections = filters?.map(filter => filter.value);
 
     return (
-      <SelectCheckboxWrapper
+      <UiCustomSelect
         ariaLabel={intl.formatMessage(messages.filterByValuesAriaLabel)}
         className={className}
         id="custom-select"
@@ -70,7 +68,7 @@ class CustomSelectBase extends React.Component<CustomSelectProps, CustomSelectSt
         onSelect={onSelect}
         options={selectOptions}
         placeholder={intl.formatMessage(messages.chooseValuePlaceholder)}
-        selections={selections}
+        selections={selections as any}
       />
     );
   }

@@ -1,4 +1,4 @@
-import './dataToolbar.scss';
+import '@koku-ui/ui-lib/components/data-toolbar/dataToolbar.css';
 
 import type { SelectWrapperOption } from '@koku-ui/ui-lib/components/selects/select-wrapper';
 import { Toolbar, ToolbarContent, ToolbarGroup, ToolbarItem, ToolbarToggleGroup } from '@patternfly/react-core';
