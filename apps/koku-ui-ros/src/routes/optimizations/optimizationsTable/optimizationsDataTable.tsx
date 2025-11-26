@@ -1,3 +1,4 @@
+import { DataTable, styles as dataTableStyles } from '@koku-ui/ui-lib/components/tables/dataTable';
 import { Icon } from '@patternfly/react-core';
 import { ExclamationTriangleIcon } from '@patternfly/react-icons/dist/esm/icons/exclamation-triangle-icon';
 import type { Query } from 'api/queries/query';
@@ -6,7 +7,6 @@ import messages from 'locales/messages';
 import React, { useEffect, useState } from 'react';
 import { useIntl } from 'react-intl';
 import { Link } from 'react-router-dom';
-import { DataTable, styles as dataTableStyles } from '@koku-ui/ui-lib/components/tables/dataTable';
 import { NoOptimizationsState } from 'routes/components/page/noOptimizations/noOptimizationsState';
 import { getOptimizationsBreakdownPath } from 'routes/utils/paths';
 import { getTimeFromNow } from 'utils/dates';
