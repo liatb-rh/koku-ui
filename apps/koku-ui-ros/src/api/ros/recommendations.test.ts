@@ -1,7 +1,7 @@
 import { axiosInstance } from 'api';
-import { RosType } from 'api/ros/ros';
+import { RosType } from '@koku-ui/utils/http/reports/ros';
 
-import { runRosReports } from './recommendations';
+import { runRosReports } from '@koku-ui/utils/http/reports/recommendations';
 
 test('api run reports calls axios get', () => {
   const query = 'limit=10';

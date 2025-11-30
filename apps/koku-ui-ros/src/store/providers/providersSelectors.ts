@@ -1,4 +1,4 @@
-import type { ProviderType } from 'api/providers';
+import type { ProviderType } from '@koku-ui/utils/http/providers';
 import type { RootState } from 'store/rootReducer';
 
 import { addProviderKey, getFetchId, stateKey } from './providersCommon';

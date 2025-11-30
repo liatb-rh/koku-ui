@@ -1,6 +1,7 @@
 import '@koku-ui/ui-lib/components/charts/common/chart.css';
 
 import ChartTheme from '@koku-ui/ui-lib/components/charts/theme';
+import { chartStyles } from '@koku-ui/ui-lib/components/optimizations/breakdown/optimizationsBreakdownChart.styles';
 import {
   Chart,
   ChartArea,
@@ -26,8 +27,6 @@ import {
   isSeriesHidden,
 } from 'routes/components/charts/common/chartUtils';
 import { unitsLookupKey } from 'utils/format';
-
-import { chartStyles } from './optimizationsBreakdownChart.styles';
 
 interface OptimizationsBreakdownChartOwnProps {
   baseHeight?: number;

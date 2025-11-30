@@ -1,6 +1,6 @@
-import type { Forecast } from 'api/forecasts/forecast';
-import type { ForecastPathsType, ForecastType } from 'api/forecasts/forecast';
-import { runForecast } from 'api/forecasts/forecastUtils';
+import type { Forecast } from '@koku-ui/utils/http/forecast/forecast';
+import type { ForecastPathsType, ForecastType } from '@koku-ui/utils/http/forecast/forecast';
+import { runForecast } from '@koku-ui/utils/http/forecast/forecastUtils';
 import type { AxiosError } from 'axios';
 import type { ThunkAction } from 'redux-thunk';
 import { FetchStatus } from 'store/common';

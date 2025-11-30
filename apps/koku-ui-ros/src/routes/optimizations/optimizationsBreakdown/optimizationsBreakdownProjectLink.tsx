@@ -1,7 +1,8 @@
+import { styles } from '@koku-ui/ui-lib/components/optimizations/breakdown/optimizationsBreakdown.styles';
+import { getQuery } from '@koku-ui/utils/http/queries/query';
+import type { OcpReport } from '@koku-ui/utils/http/reports/ocpReports';
+import { ReportPathsType, ReportType } from '@koku-ui/utils/http/reports/report';
 import { Button, Tooltip } from '@patternfly/react-core';
-import { getQuery } from 'api/queries/query';
-import type { OcpReport } from 'api/reports/ocpReports';
-import { ReportPathsType, ReportType } from 'api/reports/report';
 import type { AxiosError } from 'axios';
 import { useIsProjectLinkToggleEnabled } from 'components/featureToggle';
 import messages from 'locales/messages';
@@ -16,8 +17,6 @@ import { getBreakdownPath } from 'routes/utils/paths';
 import type { RootState } from 'store';
 import { FetchStatus } from 'store/common';
 import { reportActions, reportSelectors } from 'store/reports';
-
-import { styles } from './optimizationsBreakdown.styles';
 
 interface OptimizationsBreakdownProjectLinkOwnProps {
   breadcrumbLabel?: string;

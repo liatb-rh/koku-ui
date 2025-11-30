@@ -1,8 +1,8 @@
 import { axiosInstance } from 'api';
-import { getProvidersQuery } from 'api/queries/providersQuery';
+import { getProvidersQuery } from '@koku-ui/utils/http/queries/providersQuery';
 import { awsProvidersQuery } from 'store/providers/providersCommon';
 
-import { fetchProviders } from './providers';
+import { fetchProviders } from '@koku-ui/utils/http/providers';
 
 test('api get provider calls axiosInstance.get', () => {
   const query = getProvidersQuery(awsProvidersQuery);

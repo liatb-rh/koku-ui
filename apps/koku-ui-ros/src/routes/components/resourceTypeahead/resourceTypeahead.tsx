@@ -1,4 +1,4 @@
-import type { ResourcePathsType, ResourceType } from 'api/resources/resource';
+import type { ResourcePathsType, ResourceType } from '@koku-ui/utils/http/resources/resource';
 import type { FormEvent } from 'react';
 import React, { useState } from 'react';
 

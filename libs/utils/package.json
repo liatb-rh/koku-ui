@@ -1,0 +1,31 @@
+{
+  "name": "@koku-ui/utils",
+  "version": "0.0.1",
+  "private": true,
+  "files": [
+    "dist",
+    "src"
+  ],
+  "exports": {
+    "./*": {
+      "types": "./dist/*.d.ts",
+      "default": "./dist/*.js"
+    },
+    "./package.json": "./package.json"
+  },
+  "scripts": {
+    "prebuild": "tsc --noEmit && rimraf dist",
+    "build": "tsc --build",
+    "clean": "rimraf dist"
+  },
+  "dependencies": {
+    "qs": "^6.14.0"
+  },
+  "devDependencies": {
+    "@types/qs": "^6.14.0",
+    "rimraf": "^6.1.2",
+    "typescript": "^5.9.3"
+  }
+}
+
+

@@ -1,10 +1,19 @@
-import './optimizationsBreakdown.scss';
+import '@koku-ui/ui-lib/components/optimizations/breakdown/optimizationsBreakdown.css';
 
-import { Alert, List, ListItem, PageSection, Tab, TabContent, Tabs, TabTitleText } from '@patternfly/react-core';
-import type { Query } from 'api/queries/query';
-import { parseQuery } from 'api/queries/query';
-import type { RecommendationReportData } from 'api/ros/recommendations';
-import { RosPathsType, RosType } from 'api/ros/ros';
+import {
+  OptimizationsBreakdownLayout,
+  TabsShell,
+  type TabsShellItem,
+} from '@koku-ui/ui-lib/components/optimizations/breakdown';
+import { styles } from '@koku-ui/ui-lib/components/optimizations/breakdown/optimizationsBreakdown.styles';
+import { Interval, OptimizationType } from '@koku-ui/utils/commonTypes';
+import type { Query } from '@koku-ui/utils/http/queries/query';
+import { parseQuery } from '@koku-ui/utils/http/queries/query';
+import type { RecommendationReportData } from '@koku-ui/utils/http/reports/recommendations';
+import { RosPathsType, RosType } from '@koku-ui/utils/http/reports/ros';
+import { breadcrumbLabelKey } from '@koku-ui/utils/props';
+import { getRecommendationTerm, hasRecommendation } from '@koku-ui/utils/recommendations';
+import { Alert, List, ListItem } from '@patternfly/react-core';
 import type { AxiosError } from 'axios';
 import { useIsBoxPlotToggleEnabled } from 'components/featureToggle';
 import messages from 'locales/messages';
@@ -19,13 +28,8 @@ import { LoadingState } from 'routes/components/state/loadingState';
 import type { RootState } from 'store';
 import { FetchStatus } from 'store/common';
 import { rosActions, rosSelectors } from 'store/ros';
-import { Interval, OptimizationType } from 'utils/commonTypes';
 import { getNotifications, hasNotifications } from 'utils/notifications';
-import { breadcrumbLabelKey } from 'utils/props';
-import { hasRecommendation } from 'utils/recomendations';
-import { getRecommendationTerm } from 'utils/recomendations';
 
-import { styles } from './optimizationsBreakdown.styles';
 import { OptimizationsBreakdownConfiguration } from './optimizationsBreakdownConfiguration';
 import { OptimizationsBreakdownHeader } from './optimizationsBreakdownHeader';
 import { OptimizationsBreakdownUtilization } from './optimizationsBreakdownUtilization';
@@ -152,18 +156,7 @@ const OptimizationsBreakdown: React.FC<OptimizationsBreakdownProps> = () => {
   };
 
   const getTabContent = (availableTabs: AvailableTab[]) => {
-    return availableTabs.map((val, index) => {
-      return (
-        <TabContent
-          eventKey={index}
-          key={`${getIdKeyForTab(val.tab)}-tabContent`}
-          id={`tab-${index}`}
-          ref={val.contentRef as any}
-        >
-          {getTabItem(val.tab, index)}
-        </TabContent>
-      );
-    });
+    return availableTabs.map((val, index) => getTabItem(val.tab, index));
   };
 
   const getTabItem = (tab: OptimizationType, index: number) => {
@@ -201,24 +194,14 @@ const OptimizationsBreakdown: React.FC<OptimizationsBreakdownProps> = () => {
     }
   };
 
-  const getTab = (tab: OptimizationType, contentRef, index: number) => {
-    return (
-      <Tab
-        eventKey={index}
-        key={`${getIdKeyForTab(tab)}-tab`}
-        tabContentId={`tab-${index}`}
-        tabContentRef={contentRef}
-        title={<TabTitleText>{getTabTitle(tab)}</TabTitleText>}
-      />
-    );
-  };
-
-  const getTabs = (availableTabs: AvailableTab[]) => {
-    return (
-      <Tabs activeKey={activeTabKey} onSelect={handleTabClick}>
-        {availableTabs.map((val, index) => getTab(val.tab, val.contentRef, index))}
-      </Tabs>
-    );
+  const getTabsItems = (availableTabs: AvailableTab[]): TabsShellItem[] => {
+    const tabContents = getTabContent(availableTabs);
+    return availableTabs.map((val, index) => ({
+      key: getIdKeyForTab(val.tab),
+      title: getTabTitle(val.tab),
+      content: tabContents[index],
+      contentRef: val.contentRef,
+    }));
   };
 
   const getTabTitle = (tab: OptimizationType) => {
@@ -244,8 +227,8 @@ const OptimizationsBreakdown: React.FC<OptimizationsBreakdownProps> = () => {
   const [availableTabs] = useState(getAvailableTabs());
 
   return (
-    <>
-      <PageSection style={styles.headerContainer}>
+    <OptimizationsBreakdownLayout
+      header={
         <OptimizationsBreakdownHeader
           breadcrumbLabel={breadcrumbLabel}
           breadcrumbPath={breadcrumbPath}
@@ -257,22 +240,22 @@ const OptimizationsBreakdown: React.FC<OptimizationsBreakdownProps> = () => {
           projectPath={projectPath}
           report={report}
         />
-      </PageSection>
-      <PageSection>{getTabs(availableTabs)}</PageSection>
-      <PageSection>
-        {isLoading ? (
-          <LoadingState
-            body={intl.formatMessage(messages.optimizationsLoadingStateDesc)}
-            heading={intl.formatMessage(messages.optimizationsLoadingStateTitle)}
-          />
-        ) : (
-          <div>
-            {getAlert()}
-            {getTabContent(availableTabs)}
-          </div>
-        )}
-      </PageSection>
-    </>
+      }
+      tabs={<TabsShell activeKey={activeTabKey} onSelect={handleTabClick} items={getTabsItems(availableTabs)} />}
+      headerStyle={styles.headerContainer}
+    >
+      {isLoading ? (
+        <LoadingState
+          body={intl.formatMessage(messages.optimizationsLoadingStateDesc)}
+          heading={intl.formatMessage(messages.optimizationsLoadingStateTitle)}
+        />
+      ) : (
+        <div>
+          {getAlert()}
+          {getTabContent(availableTabs)}
+        </div>
+      )}
+    </OptimizationsBreakdownLayout>
   );
 };
 

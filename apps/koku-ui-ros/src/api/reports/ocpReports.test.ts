@@ -1,7 +1,7 @@
 import { axiosInstance } from 'api';
-import { ReportType } from 'api/reports/report';
+import { ReportType } from '@koku-ui/utils/http/reports/report';
 
-import { runReport } from './ocpReports';
+import { runReport } from '@koku-ui/utils/http/reports/ocpReports';
 
 test('api run reports calls axios get', () => {
   const query = 'filter[resolution]=daily';

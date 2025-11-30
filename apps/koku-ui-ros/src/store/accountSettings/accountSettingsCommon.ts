@@ -1,4 +1,4 @@
-import type { AccountSettingsType } from 'api/accountSettings';
+import type { AccountSettingsType } from '@koku-ui/utils/http/accountSettings';
 
 export const stateKey = 'accountSettings';
 

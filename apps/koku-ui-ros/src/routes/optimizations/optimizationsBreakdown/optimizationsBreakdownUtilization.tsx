@@ -1,17 +1,20 @@
 import './optimizationsBreakdown.scss';
 
+import {
+  chartStyles,
+  styles,
+} from '@koku-ui/ui-lib/components/optimizations/breakdown/optimizationsBreakdownUtilization.styles';
+import type { OptimizationType } from '@koku-ui/utils/commonTypes';
+import { Interval, RecommendationType, ResourceType, UsageType } from '@koku-ui/utils/commonTypes';
+import type { Recommendations } from '@koku-ui/utils/http/reports/recommendations';
+import { getRecommendationTerm } from '@koku-ui/utils/recommendations';
 import { Card, CardBody, CardTitle, Divider, Grid, GridItem, Title, TitleSizes } from '@patternfly/react-core';
-import type { Recommendations } from 'api/ros/recommendations';
 import { format } from 'date-fns';
 import messages from 'locales/messages';
 import React from 'react';
 import { useIntl } from 'react-intl';
-import type { OptimizationType } from 'utils/commonTypes';
-import { Interval, RecommendationType, ResourceType, UsageType } from 'utils/commonTypes';
-import { getRecommendationTerm } from 'utils/recomendations';
 
 import { OptimizationsBreakdownChart } from './optimizationsBreakdownChart';
-import { chartStyles, styles } from './optimizationsBreakdownUtilization.styles';
 
 interface OptimizationsBreakdownUtilizationOwnProps {
   currentInterval?: Interval.short_term | Interval.medium_term | Interval.long_term;

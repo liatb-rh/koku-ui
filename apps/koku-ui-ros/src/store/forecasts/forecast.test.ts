@@ -1,9 +1,9 @@
-jest.mock('api/forecasts/forecastUtils');
+jest.mock('@koku-ui/utils/http/forecast/forecastUtils');
 
 import { waitFor } from '@testing-library/react';
-import type { Forecast } from 'api/forecasts/forecast';
-import { ForecastPathsType, ForecastType } from 'api/forecasts/forecast';
-import { runForecast } from 'api/forecasts/forecastUtils';
+import type { Forecast } from '@koku-ui/utils/http/forecast/forecast';
+import { ForecastPathsType, ForecastType } from '@koku-ui/utils/http/forecast/forecast';
+import { runForecast } from '@koku-ui/utils/http/forecast/forecastUtils';
 import { FetchStatus } from 'store/common';
 import { createMockStoreCreator } from 'store/mockStore';
 

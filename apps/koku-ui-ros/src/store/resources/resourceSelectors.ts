@@ -1,4 +1,4 @@
-import type { ResourcePathsType, ResourceType } from 'api/resources/resource';
+import type { ResourcePathsType, ResourceType } from '@koku-ui/utils/http/resources/resource';
 import type { RootState } from 'store/rootReducer';
 
 import { getFetchId, resourceStateKey } from './resourceCommon';

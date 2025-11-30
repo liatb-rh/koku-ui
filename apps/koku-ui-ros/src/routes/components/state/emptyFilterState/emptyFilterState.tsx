@@ -1,8 +1,8 @@
 import type { MessageDescriptor } from '@formatjs/intl/src/types';
+import type { Query } from '@koku-ui/utils/http/queries/query';
+import { parseQuery } from '@koku-ui/utils/http/queries/query';
 import { Bullseye, EmptyState, EmptyStateBody } from '@patternfly/react-core';
 import { SearchIcon } from '@patternfly/react-icons/dist/esm/icons/search-icon';
-import type { Query } from 'api/queries/query';
-import { parseQuery } from 'api/queries/query';
 import { intl as defaultIntl } from 'components/i18n';
 import messages from 'locales/messages';
 import React, { useEffect, useState } from 'react';

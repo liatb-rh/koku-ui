@@ -1,4 +1,4 @@
-import type { ForecastPathsType, ForecastType } from 'api/forecasts/forecast';
+import type { ForecastPathsType, ForecastType } from '@koku-ui/utils/http/forecast/forecast';
 
 export const forecastStateKey = 'forecast';
 

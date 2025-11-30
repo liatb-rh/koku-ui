@@ -3,11 +3,11 @@ import '@koku-ui/ui-lib/components/data-toolbar/dataToolbar.css';
 import type { ToolbarChipGroupExt } from '@koku-ui/ui-lib/components/data-toolbar';
 import { CustomSelect as UiCustomSelect } from '@koku-ui/ui-lib/components/data-toolbar';
 import type { SelectWrapperOption } from '@koku-ui/ui-lib/components/selects/select-wrapper';
+import type { Filter } from '@koku-ui/utils/routing/filter';
 import messages from 'locales/messages';
 import React from 'react';
 import type { WrappedComponentProps } from 'react-intl';
 import { injectIntl } from 'react-intl';
-import type { Filter } from 'routes/utils/filter';
 import type { RouterComponentProps } from 'utils/router';
 import { withRouter } from 'utils/router';
 

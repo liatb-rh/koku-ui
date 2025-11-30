@@ -1,0 +1,44 @@
+.optimizationsOverride div {
+  display: block;
+  margin-right: 0;
+  margin-bottom: var(--pf-global--spacer--xs);
+}
+
+.optimizationsOverride div.iconOverride.decrease {
+  /* color: var(--pf-global--success-color--100); */
+}
+
+.optimizationsOverride div.iconOverride.increase {
+  /* color: var(--pf-global--danger-color--100); */
+}
+
+.optimizationsOverride div.iconOverride .fa-equals {
+  margin-left: 25px;
+  position: relative;
+}
+
+.optimizationsOverride div.iconOverride .fa-sort-up {
+  margin-left: 25px;
+  position: relative;
+  top: 3px;
+}
+
+.optimizationsOverride div.iconOverride .fa-sort-down {
+  margin-left: 25px;
+  position: relative;
+  top: -3px;
+}
+
+.optimizationsOverride div.iconOverride .fa-sort-up::before {
+  /* color: var(--pf-global--danger-color--100); */
+}
+
+.optimizationsOverride div.iconOverride .fa-sort-down::before {
+  /* color: var(--pf-global--success-color--100); */
+}
+
+.optimizationsOverride div.iconOverride span {
+  margin-right: -17px !important;
+}
+
+

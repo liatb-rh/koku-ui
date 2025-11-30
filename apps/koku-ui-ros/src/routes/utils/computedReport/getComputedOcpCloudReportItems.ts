@@ -1,5 +1,5 @@
-import type { OcpCloudQuery } from 'api/queries/ocpCloudQuery';
-import type { OcpCloudReport, OcpCloudReportItem } from 'api/reports/ocpCloudReports';
+import type { OcpCloudQuery } from '@koku-ui/utils/http/queries/ocpCloudQuery';
+import type { OcpCloudReport, OcpCloudReportItem } from '@koku-ui/utils/http/reports/ocpCloudReports';
 
 import type { ComputedReportItemsParams } from './getComputedReportItems';
 

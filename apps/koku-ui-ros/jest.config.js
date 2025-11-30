@@ -6,6 +6,10 @@ module.exports = {
   roots: ['<rootDir>/src'],
   setupFiles: ['<rootDir>/test/testEnv.js'],
   setupFilesAfterEnv: ['<rootDir>/test/jest.setup.js'],
+  moduleNameMapper: {
+    ...(baseConfig.moduleNameMapper || {}),
+    '^@koku-ui/utils/(.*)$': '<rootDir>/../../libs/utils/src/$1',
+  },
   // Ensure no experimental SWC plugins break setup files
   transform: {
     '^.+\\.svg$': 'jest-transform-stub',

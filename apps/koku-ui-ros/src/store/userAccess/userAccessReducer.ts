@@ -1,4 +1,4 @@
-import type { UserAccess } from 'api/userAccess';
+import type { UserAccess } from '@koku-ui/utils/http/userAccess';
 import type { AxiosError } from 'axios';
 import { FetchStatus } from 'store/common';
 import { resetState } from 'store/ui/uiActions';

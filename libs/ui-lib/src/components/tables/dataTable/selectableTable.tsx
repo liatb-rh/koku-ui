@@ -57,7 +57,7 @@ class SelectableTable extends React.Component<SelectableTableProps, any> {
   private getSortBy = index => {
     const { columns, orderBy } = this.props;
 
-    const direction = orderBy && orderBy[columns[index].orderBy];
+    const direction = orderBy && columns && orderBy[columns[index].orderBy];
 
     return direction
       ? {
@@ -79,7 +79,7 @@ class SelectableTable extends React.Component<SelectableTableProps, any> {
     const { columns, onSort } = this.props;
 
     if (onSort) {
-      const orderBy = columns[index].orderBy;
+      const orderBy = columns && columns[index].orderBy;
       const isSortAscending = direction === SortByDirection.asc;
       onSort(orderBy, isSortAscending);
     }
@@ -88,6 +88,7 @@ class SelectableTable extends React.Component<SelectableTableProps, any> {
   private handleOnRowClick = (rowIndex: number) => {
     const { onRowClick, rows } = this.props;
 
+    if (rows) {
     rows.map(row => (row.selected = false));
     rows[rowIndex].selected = true;
 
@@ -96,6 +97,7 @@ class SelectableTable extends React.Component<SelectableTableProps, any> {
         onRowClick(rowIndex);
       }
     });
+  }
   };
 
   public render() {

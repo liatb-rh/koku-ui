@@ -1,8 +1,9 @@
-import { DataTable, styles as dataTableStyles } from '@koku-ui/ui-lib/components/tables/dataTable';
+import { OptimizationsDataTableShell } from '@koku-ui/ui-lib/components/optimizations/table';
+import { styles as dataTableStyles } from '@koku-ui/ui-lib/components/tables/dataTable';
+import type { Query } from '@koku-ui/utils/http/queries/query';
+import type { RecommendationReport } from '@koku-ui/utils/http/reports/recommendations';
 import { Icon } from '@patternfly/react-core';
 import { ExclamationTriangleIcon } from '@patternfly/react-icons/dist/esm/icons/exclamation-triangle-icon';
-import type { Query } from 'api/queries/query';
-import type { RecommendationReport } from 'api/ros/recommendations';
 import messages from 'locales/messages';
 import React, { useEffect, useState } from 'react';
 import { useIntl } from 'react-intl';
@@ -198,7 +199,7 @@ const OptimizationsDataTable: React.FC<OptimizationsDataTableProps> = ({
   }, [report]);
 
   return (
-    <DataTable
+    <OptimizationsDataTableShell
       columns={columns}
       emptyState={<NoOptimizationsState />}
       filterBy={filterBy}

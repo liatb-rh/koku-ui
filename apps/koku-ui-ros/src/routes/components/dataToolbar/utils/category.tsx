@@ -1,17 +1,17 @@
 import type { SelectWrapperOption } from '@koku-ui/ui-lib/components/selects/select-wrapper';
 import { SelectWrapper } from '@koku-ui/ui-lib/components/selects/select-wrapper';
+import type { ResourcePathsType, ResourceType } from '@koku-ui/utils/http/resources/resource';
+import { isResourceTypeValid } from '@koku-ui/utils/http/resources/resourceUtils';
+import type { Filter } from '@koku-ui/utils/routing/filter';
 import type { ToolbarLabelGroup } from '@patternfly/react-core';
 import { SearchInput, ToolbarFilter, ToolbarItem } from '@patternfly/react-core';
 import { FilterIcon } from '@patternfly/react-icons/dist/esm/icons/filter-icon';
-import type { ResourcePathsType, ResourceType } from 'api/resources/resource';
-import { isResourceTypeValid } from 'api/resources/resourceUtils';
 import { intl } from 'components/i18n';
 import messages from 'locales/messages';
 import { cloneDeep } from 'lodash';
 import React from 'react';
 import type { ToolbarChipGroupExt } from 'routes/components/dataToolbar/utils/common';
 import { ResourceTypeahead } from 'routes/components/resourceTypeahead';
-import type { Filter } from 'routes/utils/filter';
 
 import type { Filters } from './common';
 import { cleanInput, getChips, getFilter, hasFilters } from './common';

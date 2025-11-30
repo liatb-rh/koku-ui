@@ -1,10 +1,15 @@
-import type { AccountSettings } from 'api/accountSettings';
+import type { AccountSettings } from '@koku-ui/utils/http/accountSettings';
+import {
+  getAccountCurrency,
+  isCurrencyAvailable,
+  setAccountCurrency,
+  setCurrency,
+} from '@koku-ui/utils/sessionStorage';
 import type { AxiosError } from 'axios';
 import { FetchStatus } from 'store/common';
 import { resetState } from 'store/ui/uiActions';
 import type { ActionType } from 'typesafe-actions';
 import { getType } from 'typesafe-actions';
-import { getAccountCurrency, isCurrencyAvailable, setAccountCurrency, setCurrency } from 'utils/sessionStorage';
 
 import {
   fetchAccountSettingsFailure,

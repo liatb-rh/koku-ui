@@ -1,5 +1,5 @@
-import { getQueryRoute } from 'api/queries/query';
-import { breadcrumbLabelKey, breakdownDescKey, breakdownTitleKey } from 'utils/props';
+import { getQueryRoute } from '@koku-ui/utils/http/queries/query';
+import { breadcrumbLabelKey, breakdownDescKey, breakdownTitleKey } from '@koku-ui/utils/props';
 
 export const getBreakdownPath = ({
   basePath,

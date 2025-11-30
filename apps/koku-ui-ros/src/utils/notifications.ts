@@ -1,5 +1,10 @@
-import type { Notification, RecommendationEngine, Recommendations, RecommendationTerm } from 'api/ros/recommendations';
-import { Interval, OptimizationType } from 'utils/commonTypes';
+import { Interval, OptimizationType } from '@koku-ui/utils/commonTypes';
+import type {
+  Notification,
+  RecommendationEngine,
+  Recommendations,
+  RecommendationTerm,
+} from '@koku-ui/utils/http/reports/recommendations';
 
 // Filter notifications (e.g., optimized notices) that should not be associated with a warning icon
 //

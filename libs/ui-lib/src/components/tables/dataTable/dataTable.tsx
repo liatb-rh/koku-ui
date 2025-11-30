@@ -60,7 +60,7 @@ class DataTable extends React.Component<DataTableProps, any> {
   private getSortBy = index => {
     const { columns, orderBy } = this.props;
 
-    const direction = orderBy && orderBy[columns[index].orderBy];
+    const direction = orderBy && columns && orderBy[columns[index].orderBy];
 
     return direction
       ? {
@@ -84,14 +84,14 @@ class DataTable extends React.Component<DataTableProps, any> {
     let newRows;
     let items = [];
     if (rowId === -1) {
-      newRows = rows.map(row => {
+      newRows = rows && rows.map(row => {
         row.selected = isSelected;
         return row;
       });
     } else {
-      newRows = [...rows];
+      newRows = rows && [...rows];
       newRows[rowId].selected = isSelected;
-      items = [newRows[rowId].item];
+      items = newRows && [newRows[rowId].item];
     }
     this.setState({ rows }, () => {
       if (onSelect) {
@@ -104,7 +104,7 @@ class DataTable extends React.Component<DataTableProps, any> {
     const { columns, onSort } = this.props;
 
     if (onSort) {
-      const orderBy = columns[index].orderBy;
+      const orderBy = columns && columns[index].orderBy;
       const isSortAscending = direction === SortByDirection.asc;
       onSort(orderBy, isSortAscending);
     }

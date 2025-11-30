@@ -1,14 +1,14 @@
+import type { Query } from '@koku-ui/utils/http/queries/query';
+import { parseQuery } from '@koku-ui/utils/http/queries/query';
+import { formatPath } from '@koku-ui/utils/paths';
+import { getGroupById, getGroupByValue } from '@koku-ui/utils/routing/groupBy';
 import { PageSection } from '@patternfly/react-core';
-import type { Query } from 'api/queries/query';
-import { parseQuery } from 'api/queries/query';
 import messages from 'locales/messages';
 import React from 'react';
 import { useIntl } from 'react-intl';
 import { useLocation } from 'react-router-dom';
 import { routes } from 'routes';
 import { OptimizationsTable } from 'routes/optimizations/optimizationsTable';
-import { getGroupById, getGroupByValue } from 'routes/utils/groupBy';
-import { formatPath } from 'utils/paths';
 
 interface OptimizationsDetailsStagingOwnProps {
   // TBD...

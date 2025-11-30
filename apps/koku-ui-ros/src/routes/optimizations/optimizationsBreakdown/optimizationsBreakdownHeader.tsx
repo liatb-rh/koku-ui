@@ -1,15 +1,15 @@
-import { Content, ContentVariants, Icon, Title, TitleSizes } from '@patternfly/react-core';
+import { BreakdownHeaderShell } from '@koku-ui/ui-lib/components/optimizations/breakdown';
+import type { OptimizationType } from '@koku-ui/utils/commonTypes';
+import type { RecommendationReportData } from '@koku-ui/utils/http/reports/recommendations';
+import { Content, ContentVariants, Icon } from '@patternfly/react-core';
 import { ExclamationTriangleIcon } from '@patternfly/react-icons/dist/esm/icons/exclamation-triangle-icon';
-import type { RecommendationReportData } from 'api/ros/recommendations';
 import messages from 'locales/messages';
 import React from 'react';
 import { useIntl } from 'react-intl';
 import { Link, useLocation } from 'react-router-dom';
-import type { OptimizationType } from 'utils/commonTypes';
 import { getTimeFromNow } from 'utils/dates';
 import { hasNotificationsWarning } from 'utils/notifications';
 
-import { styles } from './optimizationsBreakdownHeader.styles';
 import { OptimizationsBreakdownProjectLink } from './optimizationsBreakdownProjectLink';
 import { OptimizationsBreakdownToolbar } from './optimizationsBreakdownToolbar';
 
@@ -42,15 +42,13 @@ const OptimizationsBreakdownHeader: React.FC<OptimizationsBreakdownHeaderProps> 
   const location = useLocation();
   const showWarningIcon = hasNotificationsWarning(report?.recommendations);
 
-  const getBackToLink = () => {
-    return (
-      <Link to={breadcrumbPath} state={{ ...location.state }}>
-        {breadcrumbLabel ? breadcrumbLabel : intl.formatMessage(messages.breakdownBackToOptimizations)}
-      </Link>
-    );
-  };
+  const backLink = (
+    <Link to={breadcrumbPath} state={{ ...location.state }}>
+      {breadcrumbLabel ? breadcrumbLabel : intl.formatMessage(messages.breakdownBackToOptimizations)}
+    </Link>
+  );
 
-  const getDescription = () => {
+  const description = (() => {
     const clusterAlias = report?.cluster_alias ? report.cluster_alias : undefined;
     const clusterUuid = report?.cluster_uuid ? report.cluster_uuid : '';
     const cluster = clusterAlias ? clusterAlias : clusterUuid;
@@ -93,25 +91,21 @@ const OptimizationsBreakdownHeader: React.FC<OptimizationsBreakdownHeaderProps> 
         </Content>
       </Content>
     );
-  };
+  })();
 
   return (
-    <header>
-      {getBackToLink()}
-      <div style={styles.title}>
-        <Title headingLevel="h1" size={TitleSizes['2xl']}>
-          {report ? report.container : null}
-        </Title>
-        {showWarningIcon && (
-          <span style={styles.warningIcon}>
-            <Icon status="warning">
-              <ExclamationTriangleIcon />
-            </Icon>
-          </span>
-        )}
-      </div>
-      <div style={styles.description}>{getDescription()}</div>
-      <div style={styles.toolbar}>
+    <BreakdownHeaderShell
+      backLink={backLink}
+      title={report ? report.container : null}
+      rightAdornment={
+        showWarningIcon ? (
+          <Icon status="warning">
+            <ExclamationTriangleIcon />
+          </Icon>
+        ) : null
+      }
+      description={description}
+      toolbar={
         <OptimizationsBreakdownToolbar
           currentInterval={currentInterval}
           isDisabled={isDisabled}
@@ -119,8 +113,8 @@ const OptimizationsBreakdownHeader: React.FC<OptimizationsBreakdownHeaderProps> 
           optimizationType={optimizationType}
           recommendations={report?.recommendations}
         />
-      </div>
-    </header>
+      }
+    />
   );
 };
 

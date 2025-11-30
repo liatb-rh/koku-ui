@@ -1,4 +1,4 @@
-import type { AccountSettingsType } from 'api/accountSettings';
+import type { AccountSettingsType } from '@koku-ui/utils/http/accountSettings';
 import type { RootState } from 'store/rootReducer';
 
 import { getFetchId, stateKey } from './accountSettingsCommon';

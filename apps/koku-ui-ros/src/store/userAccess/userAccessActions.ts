@@ -1,6 +1,6 @@
-import type { UserAccess } from 'api/userAccess';
-import type { UserAccessType } from 'api/userAccess';
-import { fetchUserAccess as apiGetUserAccess } from 'api/userAccess';
+import type { UserAccess } from '@koku-ui/utils/http/userAccess';
+import type { UserAccessType } from '@koku-ui/utils/http/userAccess';
+import { fetchUserAccess as apiGetUserAccess } from '@koku-ui/utils/http/userAccess';
 import type { AxiosError } from 'axios';
 import type { ThunkAction } from 'store/common';
 import { FetchStatus } from 'store/common';

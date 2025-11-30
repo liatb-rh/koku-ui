@@ -57,7 +57,7 @@ const SelectWrapper: React.FC<SelectWrapperProps> = ({
   };
 
   const getPlaceholder = () => {
-    const label = typeof selection === 'string' ? selection : selection?.toString();
+    const label = typeof selection === 'string' ? selection : selection?.toString ? selection.toString() : '';
     return label ? label : placeholder;
   };
 

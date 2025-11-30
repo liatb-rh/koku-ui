@@ -35,7 +35,7 @@ class PerspectiveSelect extends React.Component<PerspectiveSelectProps, Perspect
 
     const selections: SelectWrapperOption[] = [];
 
-    options.map(option => {
+    options &&options.map(option => {
       selections.push({
         isDisabled: option.isDisabled,
         toString: () => option.label,
@@ -48,7 +48,7 @@ class PerspectiveSelect extends React.Component<PerspectiveSelectProps, Perspect
   private getSelect = () => {
     const { currentItem, isDisabled, options } = this.props;
 
-    if (options.length === 1) {
+    if (options && options.length === 1) {
       return <div style={styles.perspectiveOptionLabel}>{options[0].label}</div>;
     }
 
@@ -71,7 +71,7 @@ class PerspectiveSelect extends React.Component<PerspectiveSelectProps, Perspect
     const { onSelect } = this.props;
 
     if (onSelect) {
-      onSelect(selection.value);
+      onSelect(selection.value || '');
     }
   };
 

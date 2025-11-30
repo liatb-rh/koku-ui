@@ -1,17 +1,17 @@
 import '@koku-ui/ui-lib/components/data-toolbar/dataToolbar.css';
 
 import type { SelectWrapperOption } from '@koku-ui/ui-lib/components/selects/select-wrapper';
+import { isEqual } from '@koku-ui/utils/equal';
+import type { Query } from '@koku-ui/utils/http/queries/query';
+import type { Resource, ResourcePathsType } from '@koku-ui/utils/http/resources/resource';
+import type { Filter } from '@koku-ui/utils/routing/filter';
 import { Toolbar, ToolbarContent, ToolbarGroup, ToolbarItem, ToolbarToggleGroup } from '@patternfly/react-core';
 import { FilterIcon } from '@patternfly/react-icons/dist/esm/icons/filter-icon';
-import type { Query } from 'api/queries/query';
-import type { Resource, ResourcePathsType } from 'api/resources/resource';
 import { cloneDeep } from 'lodash';
 import React from 'react';
 import type { WrappedComponentProps } from 'react-intl';
 import { injectIntl } from 'react-intl';
 import { connect } from 'react-redux';
-import { isEqual } from 'routes/utils/equal';
-import type { Filter } from 'routes/utils/filter';
 import { createMapStateToProps } from 'store/common';
 
 import {

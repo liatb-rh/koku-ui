@@ -1,4 +1,4 @@
-import type { ReportPathsType, ReportType } from 'api/reports/report';
+import type { ReportPathsType, ReportType } from '@koku-ui/utils/http/reports/report';
 import type { RootState } from 'store/rootReducer';
 
 import { getFetchId, reportStateKey } from './reportCommon';

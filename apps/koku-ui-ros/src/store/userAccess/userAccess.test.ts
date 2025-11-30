@@ -1,9 +1,9 @@
-jest.mock('api/userAccess');
+jest.mock('@koku-ui/utils/http/userAccess');
 
 import { waitFor } from '@testing-library/react';
-import { getUserAccessQuery } from 'api/queries/userAccessQuery';
-import type { UserAccess } from 'api/userAccess';
-import { fetchUserAccess, UserAccessType } from 'api/userAccess';
+import { getUserAccessQuery } from '@koku-ui/utils/http/queries/userAccessQuery';
+import type { UserAccess } from '@koku-ui/utils/http/userAccess';
+import { fetchUserAccess, UserAccessType } from '@koku-ui/utils/http/userAccess';
 import { FetchStatus } from 'store/common';
 import { createMockStoreCreator } from 'store/mockStore';
 

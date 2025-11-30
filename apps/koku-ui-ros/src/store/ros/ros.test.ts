@@ -1,9 +1,9 @@
-jest.mock('api/ros/rosUtils');
+jest.mock('@koku-ui/utils/http/reports/rosUtils');
 
 import { waitFor } from '@testing-library/react';
-import type { RosReport } from 'api/ros/ros';
-import { RosPathsType, RosType } from 'api/ros/ros';
-import { runRosReport } from 'api/ros/rosUtils';
+import type { RosReport } from '@koku-ui/utils/http/reports/ros';
+import { RosPathsType, RosType } from '@koku-ui/utils/http/reports/ros';
+import { runRosReport } from '@koku-ui/utils/http/reports/rosUtils';
 import { FetchStatus } from 'store/common';
 import { createMockStoreCreator } from 'store/mockStore';
 

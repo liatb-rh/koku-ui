@@ -101,6 +101,7 @@ module.exports = {
     modules: [srcDir, path.resolve(__dirname, '../../node_modules')],
     alias: {
       '@koku-ui/ui-lib': path.resolve(__dirname, '../../libs/ui-lib/src'),
+      '@koku-ui/utils': path.resolve(__dirname, '../../libs/utils/src'),
     },
   },
   routes: {

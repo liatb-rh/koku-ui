@@ -1,8 +1,8 @@
-jest.mock('api/accountSettings');
+jest.mock('@koku-ui/utils/http/accountSettings');
 
 import { waitFor } from '@testing-library/react';
-import type { AccountSettings } from 'api/accountSettings';
-import { AccountSettingsType, fetchAccountSettings } from 'api/accountSettings';
+import type { AccountSettings } from '@koku-ui/utils/http/accountSettings';
+import { AccountSettingsType, fetchAccountSettings } from '@koku-ui/utils/http/accountSettings';
 import { FetchStatus } from 'store/common';
 import { createMockStoreCreator } from 'store/mockStore';
 

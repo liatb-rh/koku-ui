@@ -1,5 +1,5 @@
-import type { ProviderType } from 'api/providers';
-import type { ProvidersQuery } from 'api/queries/providersQuery';
+import type { ProviderType } from '@koku-ui/utils/http/providers';
+import type { ProvidersQuery } from '@koku-ui/utils/http/queries/providersQuery';
 
 export const stateKey = 'providers';
 export const addProviderKey = 'add-provider';

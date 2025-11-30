@@ -1,4 +1,4 @@
-import type { Resource } from 'api/resources/resource';
+import type { Resource } from '@koku-ui/utils/http/resources/resource';
 import type { AxiosError } from 'axios';
 import { FetchStatus } from 'store/common';
 import { resetState } from 'store/ui/uiActions';

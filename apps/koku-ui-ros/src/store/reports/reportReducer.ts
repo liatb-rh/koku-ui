@@ -1,4 +1,4 @@
-import type { Report } from 'api/reports/report';
+import type { Report } from '@koku-ui/utils/http/reports/report';
 import type { AxiosError } from 'axios';
 import { FetchStatus } from 'store/common';
 import { resetState } from 'store/ui/uiActions';

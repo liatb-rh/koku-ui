@@ -1,5 +1,14 @@
 import './optimizationsBreakdown.scss';
 
+import { styles } from '@koku-ui/ui-lib/components/optimizations/breakdown/optimizationsBreakdown.styles';
+import type { OptimizationType } from '@koku-ui/utils/commonTypes';
+import { ConfigType, Interval } from '@koku-ui/utils/commonTypes';
+import type {
+  Recommendations,
+  RecommendationTerm,
+  RecommendationValues,
+} from '@koku-ui/utils/http/reports/recommendations';
+import { hasRecommendationValues } from '@koku-ui/utils/recommendations';
 import {
   Card,
   CardBody,
@@ -15,21 +24,13 @@ import {
   TitleSizes,
 } from '@patternfly/react-core';
 import { ExclamationTriangleIcon } from '@patternfly/react-icons/dist/esm/icons/exclamation-triangle-icon';
-import type { RecommendationTerm } from 'api/ros/recommendations';
-import type { Recommendations } from 'api/ros/recommendations';
-import type { RecommendationValues } from 'api/ros/recommendations';
 import messages from 'locales/messages';
 import React, { useState } from 'react';
 import { useIntl } from 'react-intl';
 import { OptimizedState } from 'routes/components/state/optimizedState';
-import type { OptimizationType } from 'utils/commonTypes';
-import { ConfigType, Interval } from 'utils/commonTypes';
 import { formatOptimization, formatPercentage, unitsLookupKey } from 'utils/format';
 import { isIntervalOptimized } from 'utils/notifications';
-import { hasRecommendationValues } from 'utils/recomendations';
 import YAML from 'yaml';
-
-import { styles } from './optimizationsBreakdown.styles';
 
 interface OptimizationsBreakdownConfigurationOwnProps {
   currentInterval?: Interval.short_term | Interval.medium_term | Interval.long_term;

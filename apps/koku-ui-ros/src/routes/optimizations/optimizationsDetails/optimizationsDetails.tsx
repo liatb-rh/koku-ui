@@ -1,4 +1,4 @@
-import { Card, CardBody, PageSection } from '@patternfly/react-core';
+import { OptimizationsDetailsLayout } from '@koku-ui/ui-lib/components/optimizations/details';
 import React from 'react';
 import { OptimizationsTable } from 'routes/optimizations/optimizationsTable';
 
@@ -22,25 +22,16 @@ const OptimizationsDetails: React.FC<OptimizationsDetailsProps> = ({
   projectPath,
 }) => {
   return (
-    <>
-      <PageSection>
-        <OptimizationsDetailsHeader />
-      </PageSection>
-      <PageSection>
-        <Card>
-          <CardBody>
-            <OptimizationsTable
-              breadcrumbLabel={breadcrumbLabel}
-              breadcrumbPath={breadcrumbPath}
-              isOptimizationsDetails
-              linkPath={linkPath}
-              linkState={linkState}
-              projectPath={projectPath}
-            />
-          </CardBody>
-        </Card>
-      </PageSection>
-    </>
+    <OptimizationsDetailsLayout header={<OptimizationsDetailsHeader />}>
+      <OptimizationsTable
+        breadcrumbLabel={breadcrumbLabel}
+        breadcrumbPath={breadcrumbPath}
+        isOptimizationsDetails
+        linkPath={linkPath}
+        linkState={linkState}
+        projectPath={projectPath}
+      />
+    </OptimizationsDetailsLayout>
   );
 };
 

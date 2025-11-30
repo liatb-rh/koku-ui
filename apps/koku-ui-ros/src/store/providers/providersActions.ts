@@ -1,6 +1,6 @@
-import type { Providers } from 'api/providers';
-import type { ProviderType } from 'api/providers';
-import { fetchProviders as apiGetProviders } from 'api/providers';
+import type { Providers } from '@koku-ui/utils/http/providers';
+import type { ProviderType } from '@koku-ui/utils/http/providers';
+import { fetchProviders as apiGetProviders } from '@koku-ui/utils/http/providers';
 import type { AxiosError } from 'axios';
 import type { ThunkAction } from 'store/common';
 import { FetchStatus } from 'store/common';

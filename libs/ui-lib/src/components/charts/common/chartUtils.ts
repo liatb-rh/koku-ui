@@ -20,10 +20,10 @@ export interface ChartSeries {
 }
 
 export const getChartNames = (series: ChartSeries[]) => {
-  const result = [];
+  const result: string[] = [];
   if (series) {
     series.map(serie => {
-      result.push(serie.childName);
+      result.push(serie.childName || '');
     });
   }
   return result as any;
@@ -42,19 +42,24 @@ export const getDomain = (series: ChartSeries[], hiddenSeries: Set<number>, grou
     series.forEach((s: any, index) => {
       if (!isSeriesHidden(hiddenSeries, index) && s.data && s.data.length !== 0) {
         const { max = null, min = null } = getMaxMinValues(s.data as any);
-        if ((maxValue === null || (max as number) > maxValue) && max !== null) {
-          maxValue = max as number;
+        if (max !== null && (maxValue === null || max > maxValue)) {
+          maxValue = max;
         }
-        if ((minValue === null || (min as number) < minValue) && min !== null) {
-          minValue = min as number;
+        if (min !== null && (minValue === null || min < minValue)) {
+          minValue = min;
         }
       }
     });
   }
 
-  const threshold = (maxValue ?? 0) * 0.05;
-  const max = (maxValue ?? 0) > 0 ? Math.ceil((maxValue as number) + threshold) : 0;
-  const _min = (minValue ?? 0) > 0 ? Math.max(0, Math.floor((minValue as number) - threshold)) : 0;
+  const threshold = (maxValue !== null && maxValue !== undefined ? maxValue : 0) * 0.05;
+  const max = (maxValue !== null && maxValue !== undefined && maxValue > 0)
+    ? Math.ceil(maxValue + threshold)
+    : 0;
+
+  const _min = (minValue !== null && minValue !== undefined && minValue > 0)
+    ? Math.max(0, Math.floor(minValue - threshold))
+    : 0;
   const min = _min > 0 ? _min : 0;
 
   if (max > 0) {
@@ -67,15 +72,17 @@ export const getLegendData = (series: ChartSeries[], hiddenSeries: Set<number>, 
   if (!series) {
     return undefined;
   }
-  const result = [];
+  const result: Array<ChartLegendItem & { childName?: string; hidden: boolean }> = [];
   series.map((s, index) => {
     if (s.legendItem) {
-      const data = {
+      const data: ChartLegendItem & { childName?: string; hidden: boolean } = {
         childName: s.childName,
         ...s.legendItem,
-        ...(tooltip && { name: s.legendItem.tooltip }),
         hidden: hiddenSeries.has(index),
       };
+      if (tooltip) {
+        data.name = s.legendItem.tooltip;
+      }
       result.push(data);
     }
   });

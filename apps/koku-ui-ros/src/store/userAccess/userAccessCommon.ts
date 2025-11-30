@@ -1,5 +1,5 @@
-import type { UserAccessQuery } from 'api/queries/userAccessQuery';
-import type { UserAccessType } from 'api/userAccess';
+import type { UserAccessQuery } from '@koku-ui/utils/http/queries/userAccessQuery';
+import type { UserAccessType } from '@koku-ui/utils/http/userAccess';
 
 export const stateKey = 'userAccess';
 

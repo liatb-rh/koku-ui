@@ -1,9 +1,9 @@
-import { AlertVariant } from '@patternfly/react-core';
-import type { AccountSettings, AccountSettingsPayload, AccountSettingsType } from 'api/accountSettings';
+import type { AccountSettings, AccountSettingsPayload, AccountSettingsType } from '@koku-ui/utils/http/accountSettings';
 import {
   fetchAccountSettings as apiFetchAccountSettings,
   updateAccountSettings as apiUpdateAccountSettings,
-} from 'api/accountSettings';
+} from '@koku-ui/utils/http/accountSettings';
+import { AlertVariant } from '@patternfly/react-core';
 import type { AxiosError } from 'axios';
 import type { AxiosResponse } from 'axios';
 import { intl } from 'components/i18n';

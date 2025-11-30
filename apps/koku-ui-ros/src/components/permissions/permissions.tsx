@@ -1,6 +1,8 @@
-import { getUserAccessQuery } from 'api/queries/userAccessQuery';
-import type { UserAccess } from 'api/userAccess';
-import { UserAccessType } from 'api/userAccess';
+import { getUserAccessQuery } from '@koku-ui/utils/http/queries/userAccessQuery';
+import type { UserAccess } from '@koku-ui/utils/http/userAccess';
+import { UserAccessType } from '@koku-ui/utils/http/userAccess';
+import { formatPath, usePathname } from '@koku-ui/utils/paths';
+import { hasRosAccess } from '@koku-ui/utils/userAccess';
 import type { AxiosError } from 'axios';
 import React from 'react';
 import { connect } from 'react-redux';
@@ -12,8 +14,6 @@ import { createMapStateToProps, FetchStatus } from 'store/common';
 import { userAccessQuery, userAccessSelectors } from 'store/userAccess';
 import type { ChromeComponentProps } from 'utils/chrome';
 import { withChrome } from 'utils/chrome';
-import { formatPath, usePathname } from 'utils/paths';
-import { hasRosAccess } from 'utils/userAccess';
 
 interface PermissionsOwnProps extends ChromeComponentProps {
   children?: React.ReactNode;

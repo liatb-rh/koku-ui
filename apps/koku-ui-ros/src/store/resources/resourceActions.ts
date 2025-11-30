@@ -1,6 +1,6 @@
-import type { Resource } from 'api/resources/resource';
-import type { ResourcePathsType, ResourceType } from 'api/resources/resource';
-import { runResource } from 'api/resources/resourceUtils';
+import type { Resource } from '@koku-ui/utils/http/resources/resource';
+import type { ResourcePathsType, ResourceType } from '@koku-ui/utils/http/resources/resource';
+import { runResource } from '@koku-ui/utils/http/resources/resourceUtils';
 import type { AxiosError } from 'axios';
 import type { ThunkAction } from 'redux-thunk';
 import { FetchStatus } from 'store/common';

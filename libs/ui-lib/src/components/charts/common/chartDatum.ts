@@ -88,7 +88,7 @@ export function getTooltipContent(
   formatter: (value: number, unit?: string, options?: any) => string,
   formatUnitMessage?: (units: string, formattedValue: string) => string
 ) {
-  return function labelFormatter(value: number, unit: string = null, options: any = {}) {
+  return function labelFormatter(value: number, unit: string = "", options: any = {}) {
     const formatted = formatter(value, unit, options);
     if (formatUnitMessage) {
       return formatUnitMessage(unit, formatted);

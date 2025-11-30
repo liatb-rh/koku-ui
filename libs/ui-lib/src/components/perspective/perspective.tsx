@@ -84,7 +84,7 @@ const Perspective: React.FC<PerspectiveProps> = ({
   isInfrastructureTab,
   isRhelTab,
   labelFor = v => v,
-  onSelect,
+  onSelect = () => {},
   title,
 }) => {
   const options: Array<{ label: string; value: string }> = [];

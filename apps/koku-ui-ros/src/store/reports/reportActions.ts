@@ -1,5 +1,5 @@
-import type { Report, ReportPathsType, ReportType } from 'api/reports/report';
-import { runReport } from 'api/reports/reportUtils';
+import type { Report, ReportPathsType, ReportType } from '@koku-ui/utils/http/reports/report';
+import { runReport } from '@koku-ui/utils/http/reports/reportUtils';
 import type { AxiosError } from 'axios';
 import type { ThunkAction } from 'store/common';
 import { FetchStatus } from 'store/common';

@@ -1,7 +1,7 @@
 import { OptimizationsSummary as UiOptimizationsSummary } from '@koku-ui/ui-lib/components/optimizations/summary';
-import { getQuery } from 'api/queries/query';
-import type { RosReport } from 'api/ros/ros';
-import { RosPathsType, RosType } from 'api/ros/ros';
+import { getQuery } from '@koku-ui/utils/http/queries/query';
+import type { RosReport } from '@koku-ui/utils/http/reports/ros';
+import { RosPathsType, RosType } from '@koku-ui/utils/http/reports/ros';
 import type { AxiosError } from 'axios';
 import messages from 'locales/messages';
 import React, { useEffect } from 'react';

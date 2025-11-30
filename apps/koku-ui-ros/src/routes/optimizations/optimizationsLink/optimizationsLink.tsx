@@ -1,7 +1,7 @@
 import { OptimizationsLink as UiOptimizationsLink } from '@koku-ui/ui-lib/components/optimizations/link';
-import { getQuery } from 'api/queries/query';
-import type { RosReport } from 'api/ros/ros';
-import { RosPathsType, RosType } from 'api/ros/ros';
+import { getQuery } from '@koku-ui/utils/http/queries/query';
+import type { RosReport } from '@koku-ui/utils/http/reports/ros';
+import { RosPathsType, RosType } from '@koku-ui/utils/http/reports/ros';
 import type { AxiosError } from 'axios';
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';

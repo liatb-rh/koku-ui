@@ -1,11 +1,11 @@
+import type { RosQuery } from '@koku-ui/utils/http/queries/rosQuery';
+import type { Filter } from '@koku-ui/utils/routing/filter';
 import type { ToolbarLabelGroup } from '@patternfly/react-core';
-import type { RosQuery } from 'api/queries/rosQuery';
 import messages from 'locales/messages';
 import React from 'react';
 import type { WrappedComponentProps } from 'react-intl';
 import { injectIntl } from 'react-intl';
 import { BasicToolbar } from 'routes/components/dataToolbar';
-import type { Filter } from 'routes/utils/filter';
 
 interface OptimizationsToolbarOwnProps {
   hideCluster?: boolean;

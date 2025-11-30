@@ -1,4 +1,4 @@
-import type { RosReport } from 'api/ros/ros';
+import type { RosReport } from '@koku-ui/utils/http/reports/ros';
 import type { AxiosError } from 'axios';
 import { FetchStatus } from 'store/common';
 import { resetState } from 'store/ui/uiActions';

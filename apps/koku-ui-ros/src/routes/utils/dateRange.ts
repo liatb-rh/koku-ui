@@ -1,4 +1,4 @@
-import type { Query } from 'api/queries/query';
+import type { Query } from '@koku-ui/utils/http/queries/query';
 import { endOfMonth } from 'date-fns';
 import {
   formatStartEndDate,

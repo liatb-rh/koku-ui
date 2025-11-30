@@ -1,4 +1,4 @@
-import { tagPrefix } from 'utils/props';
+import { tagPrefix } from '@koku-ui/utils/props';
 
 export interface GetItemLabelParams {
   idKey: any;

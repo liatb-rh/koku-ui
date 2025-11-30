@@ -1,4 +1,4 @@
-import type { UserAccessType } from 'api/userAccess';
+import type { UserAccessType } from '@koku-ui/utils/http/userAccess';
 import type { RootState } from 'store/rootReducer';
 
 import { getFetchId, stateKey } from './userAccessCommon';

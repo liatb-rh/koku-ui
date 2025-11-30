@@ -1,10 +1,10 @@
+import { formatPath } from '@koku-ui/utils/paths';
 import { PageSection } from '@patternfly/react-core';
 import React from 'react';
 import { useLocation } from 'react-router-dom';
 import { routes } from 'routes';
 import { OptimizationsLink } from 'routes/optimizations/optimizationsLink';
 import { getBreakdownPath } from 'routes/utils/paths';
-import { formatPath } from 'utils/paths';
 
 interface OptimizationsLinkStagingOwnProps {
   // TBD...

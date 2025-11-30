@@ -1,9 +1,9 @@
-jest.mock('api/resources/resourceUtils');
+jest.mock('@koku-ui/utils/http/resources/resourceUtils');
 
 import { waitFor } from '@testing-library/react';
-import type { Resource } from 'api/resources/resource';
-import { ResourcePathsType, ResourceType } from 'api/resources/resource';
-import { runResource } from 'api/resources/resourceUtils';
+import type { Resource } from '@koku-ui/utils/http/resources/resource';
+import { ResourcePathsType, ResourceType } from '@koku-ui/utils/http/resources/resource';
+import { runResource } from '@koku-ui/utils/http/resources/resourceUtils';
 import { FetchStatus } from 'store/common';
 import { createMockStoreCreator } from 'store/mockStore';
 

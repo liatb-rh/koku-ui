@@ -1,9 +1,9 @@
-jest.mock('api/reports/reportUtils');
+jest.mock('@koku-ui/utils/http/reports/reportUtils');
 
 import { waitFor } from '@testing-library/react';
-import type { Report } from 'api/reports/report';
-import { ReportPathsType, ReportType } from 'api/reports/report';
-import { runReport } from 'api/reports/reportUtils';
+import type { Report } from '@koku-ui/utils/http/reports/report';
+import { ReportPathsType, ReportType } from '@koku-ui/utils/http/reports/report';
+import { runReport } from '@koku-ui/utils/http/reports/reportUtils';
 import { FetchStatus } from 'store/common';
 import { createMockStoreCreator } from 'store/mockStore';
 

@@ -1,4 +1,4 @@
-import type { Forecast } from 'api/forecasts/forecast';
+import type { Forecast } from '@koku-ui/utils/http/forecast/forecast';
 import type { AxiosError } from 'axios';
 import { FetchStatus } from 'store/common';
 import { resetState } from 'store/ui/uiActions';

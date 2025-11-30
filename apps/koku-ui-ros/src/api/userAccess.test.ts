@@ -1,8 +1,8 @@
 import { axiosInstance } from 'api';
-import { getUserAccessQuery } from 'api/queries/userAccessQuery';
+import { getUserAccessQuery } from '@koku-ui/utils/http/queries/userAccessQuery';
 import { awsUserAccessQuery } from 'store/userAccess/userAccessCommon';
 
-import { fetchUserAccess } from './userAccess';
+import { fetchUserAccess } from '@koku-ui/utils/http/userAccess';
 
 test('api get provider calls axiosInstance.get', () => {
   const query = getUserAccessQuery(awsUserAccessQuery);

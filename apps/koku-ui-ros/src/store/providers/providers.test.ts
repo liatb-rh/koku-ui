@@ -1,9 +1,9 @@
-jest.mock('api/providers');
+jest.mock('@koku-ui/utils/http/providers');
 
 import { waitFor } from '@testing-library/react';
-import type { Providers } from 'api/providers';
-import { fetchProviders, ProviderType } from 'api/providers';
-import { getProvidersQuery } from 'api/queries/providersQuery';
+import type { Providers } from '@koku-ui/utils/http/providers';
+import { fetchProviders, ProviderType } from '@koku-ui/utils/http/providers';
+import { getProvidersQuery } from '@koku-ui/utils/http/queries/providersQuery';
 import { FetchStatus } from 'store/common';
 import { createMockStoreCreator } from 'store/mockStore';
 

@@ -1,7 +1,7 @@
-import type { Report, ReportData, ReportItem, ReportItemValue, ReportValue } from 'api/reports/report';
+import type { Report, ReportData, ReportItem, ReportItemValue, ReportValue } from '@koku-ui/utils/http/reports/report';
+import { sort, SortDirection } from '@koku-ui/utils/sort';
 import { intl } from 'components/i18n';
 import messages from 'locales/messages';
-import { sort, SortDirection } from 'routes/utils/sort';
 
 import { getItemLabel } from './getItemLabel';
 

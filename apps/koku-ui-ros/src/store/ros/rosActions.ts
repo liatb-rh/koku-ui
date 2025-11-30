@@ -1,6 +1,6 @@
-import type { RosReport, RosType } from 'api/ros/ros';
-import type { RosPathsType } from 'api/ros/ros';
-import { runRosReport } from 'api/ros/rosUtils';
+import type { RosReport, RosType } from '@koku-ui/utils/http/reports/ros';
+import type { RosPathsType } from '@koku-ui/utils/http/reports/ros';
+import { runRosReport } from '@koku-ui/utils/http/reports/rosUtils';
 import type { AxiosError } from 'axios';
 import type { ThunkAction } from 'store/common';
 import { FetchStatus } from 'store/common';

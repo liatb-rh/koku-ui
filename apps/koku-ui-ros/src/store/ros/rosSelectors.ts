@@ -1,4 +1,4 @@
-import type { RosPathsType, RosType } from 'api/ros/ros';
+import type { RosPathsType, RosType } from '@koku-ui/utils/http/reports/ros';
 import type { RootState } from 'store/rootReducer';
 
 import { getFetchId, rosStateKey } from './rosCommon';
