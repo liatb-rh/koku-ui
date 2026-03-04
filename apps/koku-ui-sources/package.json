@@ -1,0 +1,61 @@
+{
+  "name": "@koku-ui/koku-ui-sources",
+  "version": "0.0.1",
+  "description": "Sources / Integrations UI for Cost Management On-Prem",
+  "main": "index.js",
+  "repository": "https://github.com/project-koku/koku-ui.git",
+  "author": "Red Hat",
+  "license": "Apache-2.0",
+  "private": true,
+  "engines": {
+    "node": ">=22.20.0",
+    "npm": ">=11.6.2"
+  },
+  "scripts": {
+    "build": "NODE_ENV=production npm run ts-node ../../node_modules/.bin/webpack --mode=production",
+    "check:dependencies": "npx npm-check-updates",
+    "clean": "rimraf dist",
+    "start": "npm run ts-node ../../node_modules/.bin/webpack serve --mode=development --color --progress",
+    "lint": "eslint src",
+    "lint:fix": "eslint src --fix",
+    "test": "jest",
+    "ts-node": "ts-node -O '{\"module\":\"commonjs\"}'"
+  },
+  "dependencies": {
+    "@patternfly/patternfly": "6.4.0",
+    "@patternfly/react-component-groups": "6.4.0",
+    "@patternfly/react-core": "6.4.1",
+    "@patternfly/react-icons": "6.4.0",
+    "@patternfly/react-table": "6.4.1",
+    "@patternfly/react-tokens": "6.4.0",
+    "axios": "^1.7.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "react-intl": "^8.1.3",
+    "react-redux": "^9.2.0",
+    "react-router-dom": "^6.30.1",
+    "redux": "^5.0.1",
+    "redux-thunk": "^3.1.0",
+    "typesafe-actions": "^5.1.0"
+  },
+  "devDependencies": {
+    "@testing-library/jest-dom": "^6.9.1",
+    "@testing-library/react": "^16.3.2",
+    "@testing-library/user-event": "^14.6.1",
+    "@types/node": "^25.3.0",
+    "identity-obj-proxy": "^3.0.0",
+    "jest": "^30.2.0",
+    "jest-environment-jsdom": "^30.2.0",
+    "ts-jest": "^29.4.6",
+    "css-loader": "^7.1.2",
+    "css-minimizer-webpack-plugin": "^7.0.4",
+    "sass": "^1.97.3",
+    "sass-loader": "^16.0.7",
+    "style-loader": "^4.0.0",
+    "ts-loader": "^9.5.4",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.9.3",
+    "webpack": "5.105.0",
+    "webpack-dev-server": "^5.2.3"
+  }
+}

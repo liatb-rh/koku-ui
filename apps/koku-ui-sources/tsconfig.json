@@ -1,0 +1,18 @@
+{
+  "extends": "../../tsconfig.json",
+  "compilerOptions": {
+    "baseUrl": "./src",
+    "outDir": "./dist/",
+    "paths": {
+      "@koku-ui/ui-lib/*": ["../../../libs/ui-lib/src/*"],
+      "@koku-ui/onprem-cloud-deps/*": ["../../../libs/onprem-cloud-deps/src/*"],
+      "@redhat-cloud-services/frontend-components": ["../../../libs/onprem-cloud-deps/src/frontend-components"],
+      "@redhat-cloud-services/frontend-components/*": ["../../../libs/onprem-cloud-deps/src/frontend-components/*"],
+      "@redhat-cloud-services/frontend-components-notifications": ["../../../libs/onprem-cloud-deps/src/frontend-components-notifications"],
+      "@redhat-cloud-services/frontend-components-notifications/*": ["../../../libs/onprem-cloud-deps/src/frontend-components-notifications/*"],
+      "@unleash/proxy-client-react": ["../../../libs/onprem-cloud-deps/src/unleash/proxy-client-react"]
+    }
+  },
+  "include": ["./src/**/*.ts*"],
+  "exclude": ["./src/**/*.test.ts*"]
+}

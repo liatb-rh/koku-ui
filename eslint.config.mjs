@@ -203,6 +203,13 @@ export default [{
     rules: {
         'sort-keys-fix/sort-keys-fix': 'error',
     },
+}, {
+    files: ['apps/koku-ui-sources/**/*.ts', 'apps/koku-ui-sources/**/*.tsx'],
+    rules: {
+        'no-restricted-imports': 'off',
+        '@typescript-eslint/no-unused-vars': ['error', { argsIgnorePattern: '^_' }],
+        'no-console': ['error', { allow: ['error'] }],
+    },
 }, ...compat.extends('plugin:testing-library/react').map(config => ({
     ...config,
     files: ['**/__tests__/**/*.[jt]s?(x)', '**/?(*.)+(spec|test).[jt]s?(x)'],

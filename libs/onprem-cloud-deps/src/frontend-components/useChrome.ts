@@ -12,6 +12,10 @@ export const useChrome = () => {
           },
         };
       },
+      getToken: async () => '',
+      logout: async () => {},
     },
+    getUserPermissions: async () => [] as string[],
+    isProd: () => false,
   };
 };
