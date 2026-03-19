@@ -8,6 +8,7 @@ module.exports = {
   setupFilesAfterEnv: ['<rootDir>/test/jest.setup.js'],
   moduleNameMapper: {
     ...baseConfig.moduleNameMapper,
+    '^@koku-ui/ui-lib/(.*)$': '<rootDir>/../../libs/ui-lib/src/$1',
     '^redux/(.*)$': '<rootDir>/src/redux/$1',
   },
   transform: {

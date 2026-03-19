@@ -3,9 +3,11 @@ import React from 'react';
 
 import SourcesPageWrapper from './sourcesPageWrapper';
 
-describe('SourcesPageWrapper (PR1 stub)', () => {
-  it('renders skeleton placeholder', () => {
+describe('SourcesPageWrapper', () => {
+  it('renders with i18n title and Redux-backed count (PR2 foundation)', () => {
     render(<SourcesPageWrapper />);
     expect(screen.getByTestId('sources-skeleton')).toBeInTheDocument();
+    expect(screen.getByText('Sources')).toBeInTheDocument();
+    expect(screen.getByTestId('sources-redux-count')).toHaveTextContent('0');
   });
 });
