@@ -62,7 +62,7 @@ const renderWithProviders = (preloadedState = {}, props: { canWrite?: boolean } 
   );
 };
 
-describe('SourcesPage (PR3 list UI)', () => {
+describe('SourcesPage (PR4 list + add-source wizard)', () => {
   beforeEach(() => {
     jest.useRealTimers();
     jest.clearAllMocks();
@@ -104,7 +104,7 @@ describe('SourcesPage (PR3 list UI)', () => {
     expect(screen.getByText('My OCP Source')).toBeInTheDocument();
   });
 
-  it('does not open a wizard when Add source is clicked (PR4)', async () => {
+  it('opens the Add source wizard when toolbar button is clicked', async () => {
     const user = userEvent.setup();
     const { listSources } = require('api/entities');
     listSources.mockReturnValue(new Promise(() => {}));
@@ -112,7 +112,7 @@ describe('SourcesPage (PR3 list UI)', () => {
     renderWithProviders({ entities: [mockSource], count: 1 }, { canWrite: true });
 
     await user.click(screen.getByText('Add source'));
-    expect(screen.queryByRole('dialog')).not.toBeInTheDocument();
+    expect(screen.getByText('Add source', { selector: '.pf-v6-c-modal-box__title-text' })).toBeInTheDocument();
   });
 
   it('does not show Remove in kebab until PR5', async () => {
@@ -201,7 +201,7 @@ describe('SourcesPage (PR3 list UI)', () => {
     expect(listSources).toHaveBeenCalled();
   });
 
-  it('does not open wizard from empty state tile (PR4)', async () => {
+  it('opens wizard with preselected type from empty state tile', async () => {
     const user = userEvent.setup();
     const { listSources } = require('api/entities');
     listSources.mockResolvedValue({
@@ -215,10 +215,11 @@ describe('SourcesPage (PR3 list UI)', () => {
     });
 
     const ocpCard = document.getElementById('source-type-OCP');
-    if (ocpCard) {
-      await user.click(ocpCard);
-    }
-    expect(screen.queryByRole('dialog')).not.toBeInTheDocument();
+    expect(ocpCard).toBeTruthy();
+    await user.click(ocpCard!);
+    await waitFor(() => {
+      expect(screen.getByText('Add an OpenShift source')).toBeInTheDocument();
+    });
   });
 
   it('handles toggle pause error gracefully', async () => {

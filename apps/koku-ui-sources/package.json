@@ -24,6 +24,8 @@
     "ts-node": "ts-node -O '{\"module\":\"commonjs\"}'"
   },
   "dependencies": {
+    "@data-driven-forms/common": "^4.1.13",
+    "@data-driven-forms/react-form-renderer": "^4.1.13",
     "@patternfly/patternfly": "6.4.0",
     "@patternfly/react-core": "6.4.1",
     "@patternfly/react-icons": "6.4.0",
