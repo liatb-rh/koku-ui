@@ -62,7 +62,7 @@ const renderWithProviders = (preloadedState = {}, props: { canWrite?: boolean } 
   );
 };
 
-describe('SourcesPage (PR4 list + add-source wizard)', () => {
+describe('SourcesPage (list, wizard, detail, modals)', () => {
   beforeEach(() => {
     jest.useRealTimers();
     jest.clearAllMocks();
@@ -115,19 +115,20 @@ describe('SourcesPage (PR4 list + add-source wizard)', () => {
     expect(screen.getByText('Add source', { selector: '.pf-v6-c-modal-box__title-text' })).toBeInTheDocument();
   });
 
-  it('does not show Remove in kebab until PR5', async () => {
+  it('switches to detail view when a source name is clicked and loads source', async () => {
     const user = userEvent.setup();
-    const { listSources } = require('api/entities');
+    const { listSources, getSource } = require('api/entities');
     listSources.mockReturnValue(new Promise(() => {}));
+    getSource.mockResolvedValue(mockSource);
 
-    renderWithProviders({ entities: [mockSource], count: 1 }, { canWrite: true });
+    renderWithProviders({ entities: [mockSource], count: 1 });
 
-    const kebabButtons = screen.getAllByRole('button', { name: 'Kebab toggle' });
-    await user.click(kebabButtons[0]);
+    await user.click(screen.getByText('My OCP Source'));
 
-    expect(screen.queryByText('Remove')).not.toBeInTheDocument();
-    expect(screen.getByText('Pause')).toBeInTheDocument();
-    expect(screen.getByText('View details')).toBeInTheDocument();
+    await waitFor(() => {
+      expect(screen.queryByText('Add source')).not.toBeInTheDocument();
+    });
+    expect(getSource).toHaveBeenCalledWith('uuid-1');
   });
 
   it('pauses a source from the kebab menu', async () => {
@@ -144,6 +145,55 @@ describe('SourcesPage (PR4 list + add-source wizard)', () => {
 
     await waitFor(() => {
       expect(pauseSource).toHaveBeenCalledWith(expect.objectContaining({ uuid: 'uuid-1' }));
+    });
+  });
+
+  it('shows Remove in kebab when canWrite', async () => {
+    const user = userEvent.setup();
+    const { listSources } = require('api/entities');
+    listSources.mockReturnValue(new Promise(() => {}));
+
+    renderWithProviders({ entities: [mockSource], count: 1 }, { canWrite: true });
+
+    const kebabButtons = screen.getAllByRole('button', { name: 'Kebab toggle' });
+    await user.click(kebabButtons[0]);
+
+    expect(screen.getByText('Remove')).toBeInTheDocument();
+    expect(screen.getByText('Pause')).toBeInTheDocument();
+    expect(screen.getByText('View details')).toBeInTheDocument();
+  });
+
+  it('opens remove modal from the kebab menu', async () => {
+    const user = userEvent.setup();
+    const { listSources } = require('api/entities');
+    listSources.mockReturnValue(new Promise(() => {}));
+
+    renderWithProviders({ entities: [mockSource], count: 1 }, { canWrite: true });
+
+    const kebabButtons = screen.getAllByRole('button', { name: 'Kebab toggle' });
+    await user.click(kebabButtons[0]);
+    await user.click(screen.getByText('Remove'));
+
+    expect(screen.getByText(/Are you sure you want to remove/)).toBeInTheDocument();
+  });
+
+  it('closes remove modal via Cancel', async () => {
+    const user = userEvent.setup();
+    const { listSources } = require('api/entities');
+    listSources.mockReturnValue(new Promise(() => {}));
+
+    renderWithProviders({ entities: [mockSource], count: 1 }, { canWrite: true });
+
+    const kebabButtons = screen.getAllByRole('button', { name: 'Kebab toggle' });
+    await user.click(kebabButtons[0]);
+    await user.click(screen.getByText('Remove'));
+
+    expect(screen.getByText(/Are you sure you want to remove/)).toBeInTheDocument();
+
+    await user.click(screen.getByText('Cancel'));
+
+    await waitFor(() => {
+      expect(screen.queryByText(/Are you sure you want to remove/)).not.toBeInTheDocument();
     });
   });
 
@@ -236,6 +286,23 @@ describe('SourcesPage (PR4 list + add-source wizard)', () => {
 
     await waitFor(() => {
       expect(pauseSource).toHaveBeenCalled();
+    });
+  });
+
+  it('calls view details from kebab action', async () => {
+    const user = userEvent.setup();
+    const { listSources, getSource } = require('api/entities');
+    listSources.mockReturnValue(new Promise(() => {}));
+    getSource.mockResolvedValue(mockSource);
+
+    renderWithProviders({ entities: [mockSource], count: 1 });
+
+    const kebabButtons = screen.getAllByRole('button', { name: 'Kebab toggle' });
+    await user.click(kebabButtons[0]);
+    await user.click(screen.getByText('View details'));
+
+    await waitFor(() => {
+      expect(getSource).toHaveBeenCalled();
     });
   });
 });

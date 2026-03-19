@@ -1,6 +1,8 @@
 import { Bullseye, PageSection, Spinner } from '@patternfly/react-core';
 import { pauseSource, resumeSource } from 'api/entities';
 import { AddSourceWizard } from 'components/add-source-wizard/AddSourceWizard';
+import { SourceRemoveModal } from 'components/modals/SourceRemoveModal';
+import { SourceDetail } from 'components/sourceDetail/SourceDetail';
 import { SourcesTable } from 'components/sourcesTable/SourcesTable';
 import { SourcesToolbar } from 'components/sourcesTable/SourcesToolbar';
 import React, { useCallback, useEffect, useState } from 'react';
@@ -11,20 +13,21 @@ import type { Source, SourceType } from 'typings/source';
 
 import { SourcesEmptyState } from './SourcesEmptyState';
 
+type ViewState = { type: 'list' } | { type: 'detail'; uuid: string };
+
 interface SourcesPageProps {
   canWrite?: boolean;
 }
 
-/**
- * List UI + add-source wizard (PR 4). Detail view + remove modal (PR 5).
- */
 const SourcesPage: React.FC<SourcesPageProps> = ({ canWrite = false }) => {
   const dispatch = useDispatch<AppDispatch>();
   const { entities, count, loading, filterValue, filterColumn, page, perPage, sortBy, sortDirection } = useSelector(
     (state: RootState) => state.sources
   );
+  const [currentView, setCurrentView] = useState<ViewState>({ type: 'list' });
   const [isWizardOpen, setIsWizardOpen] = useState(false);
   const [preselectedType, setPreselectedType] = useState<string | undefined>();
+  const [removeSource, setRemoveSource] = useState<Source | null>(null);
 
   useEffect(() => {
     dispatch(loadEntities());
@@ -80,7 +83,9 @@ const SourcesPage: React.FC<SourcesPageProps> = ({ canWrite = false }) => {
     dispatch(loadEntities());
   }, [dispatch]);
 
-  const noop = useCallback(() => {}, []);
+  const handleSelectSource = useCallback((source: Source) => {
+    setCurrentView({ type: 'detail', uuid: source.uuid });
+  }, []);
 
   const handleTogglePause = useCallback(
     async (source: Source) => {
@@ -98,32 +103,34 @@ const SourcesPage: React.FC<SourcesPageProps> = ({ canWrite = false }) => {
     [dispatch]
   );
 
-  if (loading && entities.length === 0) {
-    return (
-      <PageSection isFilled>
-        <Bullseye>
-          <Spinner size="lg" />
-        </Bullseye>
-      </PageSection>
-    );
-  }
-  if (!loading && count === 0 && !filterValue) {
-    return (
-      <>
+  const handleRemove = useCallback((source: Source) => {
+    setRemoveSource(source);
+  }, []);
+
+  const handleRemoveSuccess = useCallback(() => {
+    dispatch(loadEntities());
+    setRemoveSource(null);
+    setCurrentView({ type: 'list' });
+  }, [dispatch]);
+
+  const renderListContent = () => {
+    if (loading && entities.length === 0) {
+      return (
+        <PageSection isFilled>
+          <Bullseye>
+            <Spinner size="lg" />
+          </Bullseye>
+        </PageSection>
+      );
+    }
+    if (!loading && count === 0 && !filterValue) {
+      return (
         <PageSection isFilled>
           <SourcesEmptyState onSelectType={handleSelectType} />
         </PageSection>
-        <AddSourceWizard
-          isOpen={isWizardOpen}
-          onClose={handleWizardClose}
-          onSubmitSuccess={handleWizardSuccess}
-          preselectedType={preselectedType}
-        />
-      </>
-    );
-  }
-  return (
-    <>
+      );
+    }
+    return (
       <PageSection>
         <SourcesToolbar
           count={count}
@@ -139,22 +146,39 @@ const SourcesPage: React.FC<SourcesPageProps> = ({ canWrite = false }) => {
         />
         <SourcesTable
           sources={entities}
-          onSelectSource={noop}
-          onRemove={noop}
+          onSelectSource={handleSelectSource}
+          onRemove={handleRemove}
           onTogglePause={handleTogglePause}
           sortBy={sortBy}
           sortDirection={sortDirection}
           onSort={handleSort}
           canWrite={canWrite}
-          showRemoveAction={false}
         />
       </PageSection>
+    );
+  };
+
+  return (
+    <>
+      {currentView.type === 'detail' ? (
+        <SourceDetail uuid={currentView.uuid} onBack={() => setCurrentView({ type: 'list' })} canWrite={canWrite} />
+      ) : (
+        renderListContent()
+      )}
       <AddSourceWizard
         isOpen={isWizardOpen}
         onClose={handleWizardClose}
         onSubmitSuccess={handleWizardSuccess}
         preselectedType={preselectedType}
       />
+      {removeSource && (
+        <SourceRemoveModal
+          isOpen
+          source={removeSource}
+          onClose={() => setRemoveSource(null)}
+          onSuccess={handleRemoveSuccess}
+        />
+      )}
     </>
   );
 };
