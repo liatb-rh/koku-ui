@@ -8,6 +8,7 @@ import type { Configuration } from 'webpack';
 import { DefinePlugin } from 'webpack';
 
 const NODE_ENV = (process.env.NODE_ENV || 'development') as Configuration['mode'];
+const SOURCES_ENABLE_MSW = process.env.SOURCES_ENABLE_MSW === 'true';
 
 const srcDir = path.resolve(__dirname, './src');
 const distDir = path.resolve(__dirname, './dist');
@@ -81,6 +82,11 @@ const config: Configuration = {
           from: path.join(__dirname, 'locales'),
           to: path.join(distDir, 'locales'),
         },
+        {
+          from: path.join(__dirname, 'public'),
+          to: distDir,
+          noErrorOnMissing: true,
+        },
       ],
     }),
     new DynamicRemotePlugin({
@@ -102,6 +108,7 @@ const config: Configuration = {
     new DefinePlugin({
       'process.env.KOKU_UI_COMMITHASH': undefined,
       'process.env.KOKU_UI_PKGNAME': undefined,
+      'process.env.SOURCES_ENABLE_MSW': JSON.stringify(SOURCES_ENABLE_MSW ? 'true' : 'false'),
     }),
   ],
   resolve: {

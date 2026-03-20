@@ -20,6 +20,7 @@
     "lint:ts:fix": "eslint src --fix",
     "start": "npm run start:onprem",
     "start:onprem": "npm run ts-node -- ../../node_modules/.bin/webpack --config webpack-onprem.config.ts --watch --mode=development --color --progress",
+    "start:onprem:msw": "SOURCES_ENABLE_MSW=true npm run ts-node -- ../../node_modules/.bin/webpack --config webpack-onprem.config.ts --watch --mode=development --color --progress",
     "test": "jest --no-cache",
     "ts-node": "ts-node -O '{\"module\":\"commonjs\"}'"
   },
@@ -41,6 +42,7 @@
   },
   "devDependencies": {
     "@openshift/dynamic-plugin-sdk-webpack": "^5.1.0",
+    "msw": "^2.7.0",
     "ts-loader": "^9.5.4",
     "ts-node": "^10.9.2",
     "typescript": "^5.9.3"
